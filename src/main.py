@@ -1,4 +1,4 @@
-from src.lexer import tokenize
+from lexer import TokenScanner
 
 code = '''
 int main() {
@@ -7,5 +7,14 @@ int main() {
 }
 '''
 
-for tok in tokenize(code):
-    print(tok)
+scanner = TokenScanner()
+tokens, issues = scanner.scan(code)
+
+print("=== TOKENS ===")
+for tok in tokens:
+    print(f"Token(kind='{tok['kind']}', value={tok['val']!r}, line={tok['ln']}, col={tok['col']})")
+
+if issues:
+    print("\n=== ISSUES ===")
+    for issue in issues:
+        print(issue)

@@ -70,3 +70,34 @@ class VariableRegistry:
         self.scope_stack = [{}]
         self.scope_names = ['global']
         self.current_scope_id = 0
+
+    def show(self, include_values=True):
+        """
+        Return and print a formatted dump of all scopes and their variables.
+
+        Args:
+            include_values (bool): If True include current variable values in the output.
+
+        Returns:
+            str: The formatted multi-line string representation of the symbol table.
+        """
+        lines = []
+        for level, (scope, name) in enumerate(zip(self.scope_stack, self.scope_names)):
+            lines.append(f"Scope level {level} ({name}):")
+            if not scope:
+                lines.append("  <empty>")
+                continue
+            # Keep stable ordering for readability
+            for ident in sorted(scope.keys()):
+                info = scope[ident]
+                if include_values:
+                    lines.append(
+                        f"  {ident}: type={info.get('dtype')}, val={info.get('val')}, ctx={info.get('ctx')}"
+                    )
+                else:
+                    lines.append(
+                        f"  {ident}: type={info.get('dtype')}, ctx={info.get('ctx')}"
+                    )
+        out = '\n'.join(lines)
+        print(out)
+        return out

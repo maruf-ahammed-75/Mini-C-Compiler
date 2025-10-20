@@ -1,3 +1,4 @@
+# symbol table.py
 class VariableRegistry:
     def __init__(self):
         self.scope_stack = [{}]

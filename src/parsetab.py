@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COMMA DECIMAL DIVIDE ELSE EQUALS EQUAL_TO FLOAT FOR GREATER GREATER_EQ IDENTIFIER IF INT INTEGER LBRACE LESS LESS_EQ LPAREN MINUS MOD MULTIPLY NOT_EQUAL PLUS PRINT RBRACE RETURN RPAREN SEMICOLON WHILEstart : stmt_sequencestmt_sequence : stmt_sequence stmt\n                         | stmtstmt : var_decl\n               | var_assign\n               | output_stmt\n               | conditional\n               | loop\n               | code_blockvar_decl : data_type IDENTIFIER SEMICOLON\n                   | data_type IDENTIFIER EQUALS expr SEMICOLONdata_type : INT\n                     | FLOATvar_assign : IDENTIFIER EQUALS expr SEMICOLONoutput_stmt : PRINT LPAREN expr RPAREN SEMICOLONconditional : IF LPAREN comparison RPAREN code_block\n                       | IF LPAREN comparison RPAREN code_block ELSE code_blockloop : WHILE LPAREN comparison RPAREN code_blockcode_block : block_start stmt_sequence block_endblock_start : LBRACEblock_end : RBRACEcomparison : expr rel_op exprrel_op : LESS\n                  | LESS_EQ\n                  | GREATER\n                  | GREATER_EQ\n                  | EQUAL_TO\n                  | NOT_EQUALexpr : expr PLUS term\n               | expr MINUS termexpr : termterm : term MULTIPLY base\n                | term DIVIDE base\n                | term MOD baseterm : basebase : INTEGER\n                | DECIMALbase : IDENTIFIERbase : LPAREN expr RPAREN'
+_lr_signature = 'COMMA DECIMAL DIVIDE ELSE EQUALS EQUAL_TO FLOAT FOR GREATER GREATER_EQ IDENTIFIER IF INT INTEGER LBRACE LESS LESS_EQ LPAREN MINUS MOD MULTIPLY NOT_EQUAL PLUS PRINT RBRACE RETURN RPAREN SEMICOLON WHILEstart : function_list\n                 | stmt_sequencefunction_list : function_list function\n                         | functionfunction : data_type IDENTIFIER LPAREN RPAREN code_blockstmt_sequence : stmt_sequence stmt\n                         | stmtstmt : var_decl\n               | var_assign\n               | output_stmt\n               | conditional\n               | loop\n               | return_stmt\n               | code_blockreturn_stmt : RETURN expr SEMICOLON\n                       | RETURN SEMICOLONvar_decl : data_type IDENTIFIER SEMICOLON\n                   | data_type IDENTIFIER EQUALS expr SEMICOLONdata_type : INT\n                     | FLOATvar_assign : IDENTIFIER EQUALS expr SEMICOLONoutput_stmt : PRINT LPAREN expr RPAREN SEMICOLONconditional : IF LPAREN comparison RPAREN code_block\n                       | IF LPAREN comparison RPAREN code_block ELSE code_blockloop : WHILE LPAREN comparison RPAREN code_blockcode_block : block_start stmt_sequence block_endblock_start : LBRACEblock_end : RBRACEcomparison : expr rel_op exprrel_op : LESS\n                  | LESS_EQ\n                  | GREATER\n                  | GREATER_EQ\n                  | EQUAL_TO\n                  | NOT_EQUALexpr : expr PLUS term\n               | expr MINUS termexpr : termterm : term MULTIPLY base\n                | term DIVIDE base\n                | term MOD baseterm : basebase : INTEGER\n                | DECIMALbase : IDENTIFIERbase : LPAREN expr RPAREN'
     
-_lr_action_items = {'IDENTIFIER':([0,2,3,4,5,6,7,8,9,10,15,16,17,18,19,21,22,23,24,25,26,27,34,39,40,42,43,44,45,46,47,51,52,53,54,55,56,57,59,66,67,69,71,],[11,11,-3,-4,-5,-6,-7,-8,-9,20,11,-12,-13,-20,-2,28,28,28,28,11,-10,28,28,-19,-21,-14,28,28,28,28,28,28,-23,-24,-25,-26,-27,-28,-11,-15,-16,-18,-17,]),'PRINT':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,59,66,67,69,71,],[12,12,-3,-4,-5,-6,-7,-8,-9,12,-20,-2,12,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'IF':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,59,66,67,69,71,],[13,13,-3,-4,-5,-6,-7,-8,-9,13,-20,-2,13,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'WHILE':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,59,66,67,69,71,],[14,14,-3,-4,-5,-6,-7,-8,-9,14,-20,-2,14,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'INT':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,59,66,67,69,71,],[16,16,-3,-4,-5,-6,-7,-8,-9,16,-20,-2,16,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'FLOAT':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,59,66,67,69,71,],[17,17,-3,-4,-5,-6,-7,-8,-9,17,-20,-2,17,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'LBRACE':([0,2,3,4,5,6,7,8,9,15,18,19,25,26,39,40,42,50,58,59,66,67,69,70,71,],[18,18,-3,-4,-5,-6,-7,-8,-9,18,-20,-2,18,-10,-19,-21,-14,18,18,-11,-15,-16,-18,18,-17,]),'$end':([1,2,3,4,5,6,7,8,9,19,26,39,40,42,59,66,67,69,71,],[0,-1,-3,-4,-5,-6,-7,-8,-9,-2,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'RBRACE':([3,4,5,6,7,8,9,19,25,26,39,40,42,59,66,67,69,71,],[-3,-4,-5,-6,-7,-8,-9,-2,40,-10,-19,-21,-14,-11,-15,-16,-18,-17,]),'EQUALS':([11,20,],[21,27,]),'LPAREN':([12,13,14,21,22,23,24,27,34,43,44,45,46,47,51,52,53,54,55,56,57,],[22,23,24,34,34,34,34,34,34,34,34,34,34,34,34,-23,-24,-25,-26,-27,-28,]),'SEMICOLON':([20,28,29,30,31,32,33,41,49,60,61,62,63,64,65,],[26,-38,42,-31,-35,-36,-37,59,66,-29,-30,-32,-33,-34,-39,]),'INTEGER':([21,22,23,24,27,34,43,44,45,46,47,51,52,53,54,55,56,57,],[32,32,32,32,32,32,32,32,32,32,32,32,-23,-24,-25,-26,-27,-28,]),'DECIMAL':([21,22,23,24,27,34,43,44,45,46,47,51,52,53,54,55,56,57,],[33,33,33,33,33,33,33,33,33,33,33,33,-23,-24,-25,-26,-27,-28,]),'MULTIPLY':([28,30,31,32,33,60,61,62,63,64,65,],[-38,45,-35,-36,-37,45,45,-32,-33,-34,-39,]),'DIVIDE':([28,30,31,32,33,60,61,62,63,64,65,],[-38,46,-35,-36,-37,46,46,-32,-33,-34,-39,]),'MOD':([28,30,31,32,33,60,61,62,63,64,65,],[-38,47,-35,-36,-37,47,47,-32,-33,-34,-39,]),'PLUS':([28,29,30,31,32,33,35,37,41,48,60,61,62,63,64,65,68,],[-38,43,-31,-35,-36,-37,43,43,43,43,-29,-30,-32,-33,-34,-39,43,]),'MINUS':([28,29,30,31,32,33,35,37,41,48,60,61,62,63,64,65,68,],[-38,44,-31,-35,-36,-37,44,44,44,44,-29,-30,-32,-33,-34,-39,44,]),'RPAREN':([28,30,31,32,33,35,36,38,48,60,61,62,63,64,65,68,],[-38,-31,-35,-36,-37,49,50,58,65,-29,-30,-32,-33,-34,-39,-22,]),'LESS':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,52,-29,-30,-32,-33,-34,-39,]),'LESS_EQ':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,53,-29,-30,-32,-33,-34,-39,]),'GREATER':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,54,-29,-30,-32,-33,-34,-39,]),'GREATER_EQ':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,55,-29,-30,-32,-33,-34,-39,]),'EQUAL_TO':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,56,-29,-30,-32,-33,-34,-39,]),'NOT_EQUAL':([28,30,31,32,33,37,60,61,62,63,64,65,],[-38,-31,-35,-36,-37,57,-29,-30,-32,-33,-34,-39,]),'ELSE':([39,40,67,],[-19,-21,70,]),}
+_lr_action_items = {'INT':([0,2,3,4,5,8,9,10,11,12,13,14,21,22,23,25,33,40,44,51,58,59,62,79,80,81,82,84,86,],[15,15,15,-4,-7,-14,-8,-9,-10,-11,-12,-13,15,-27,-3,-6,-16,15,-17,-15,-26,-28,-21,-5,-18,-22,-23,-25,-24,]),'FLOAT':([0,2,3,4,5,8,9,10,11,12,13,14,21,22,23,25,33,40,44,51,58,59,62,79,80,81,82,84,86,],[16,16,16,-4,-7,-14,-8,-9,-10,-11,-12,-13,16,-27,-3,-6,-16,16,-17,-15,-26,-28,-21,-5,-18,-22,-23,-25,-24,]),'IDENTIFIER':([0,3,5,6,8,9,10,11,12,13,14,15,16,20,21,22,24,25,26,28,29,30,31,33,39,40,44,45,51,52,53,54,55,56,58,59,62,65,66,67,68,69,70,71,80,81,82,84,86,],[7,7,-7,27,-14,-8,-9,-10,-11,-12,-13,-19,-20,38,7,-27,41,-6,42,38,38,38,38,-16,38,7,-17,38,-15,38,38,38,38,38,-26,-28,-21,38,-30,-31,-32,-33,-34,-35,-18,-22,-23,-25,-24,]),'PRINT':([0,3,5,8,9,10,11,12,13,14,21,22,25,33,40,44,51,58,59,62,80,81,82,84,86,],[17,17,-7,-14,-8,-9,-10,-11,-12,-13,17,-27,-6,-16,17,-17,-15,-26,-28,-21,-18,-22,-23,-25,-24,]),'IF':([0,3,5,8,9,10,11,12,13,14,21,22,25,33,40,44,51,58,59,62,80,81,82,84,86,],[18,18,-7,-14,-8,-9,-10,-11,-12,-13,18,-27,-6,-16,18,-17,-15,-26,-28,-21,-18,-22,-23,-25,-24,]),'WHILE':([0,3,5,8,9,10,11,12,13,14,21,22,25,33,40,44,51,58,59,62,80,81,82,84,86,],[19,19,-7,-14,-8,-9,-10,-11,-12,-13,19,-27,-6,-16,19,-17,-15,-26,-28,-21,-18,-22,-23,-25,-24,]),'RETURN':([0,3,5,8,9,10,11,12,13,14,21,22,25,33,40,44,51,58,59,62,80,81,82,84,86,],[20,20,-7,-14,-8,-9,-10,-11,-12,-13,20,-27,-6,-16,20,-17,-15,-26,-28,-21,-18,-22,-23,-25,-24,]),'LBRACE':([0,3,5,8,9,10,11,12,13,14,21,22,25,33,40,44,51,58,59,60,62,64,72,80,81,82,84,85,86,],[22,22,-7,-14,-8,-9,-10,-11,-12,-13,22,-27,-6,-16,22,-17,-15,-26,-28,22,-21,22,22,-18,-22,-23,-25,22,-24,]),'$end':([1,2,3,4,5,8,9,10,11,12,13,14,23,25,33,44,51,58,59,62,79,80,81,82,84,86,],[0,-1,-2,-4,-7,-14,-8,-9,-10,-11,-12,-13,-3,-6,-16,-17,-15,-26,-28,-21,-5,-18,-22,-23,-25,-24,]),'RBRACE':([5,8,9,10,11,12,13,14,25,33,40,44,51,58,59,62,80,81,82,84,86,],[-7,-14,-8,-9,-10,-11,-12,-13,-6,-16,59,-17,-15,-26,-28,-21,-18,-22,-23,-25,-24,]),'EQUALS':([7,27,42,],[28,45,45,]),'LPAREN':([17,18,19,20,27,28,29,30,31,39,41,45,52,53,54,55,56,65,66,67,68,69,70,71,],[29,30,31,39,43,39,39,39,39,39,43,39,39,39,39,39,39,39,-30,-31,-32,-33,-34,-35,]),'SEMICOLON':([20,27,32,34,35,36,37,38,42,46,61,63,73,74,75,76,77,78,],[33,44,51,-38,-42,-43,-44,-45,44,62,80,81,-36,-37,-39,-40,-41,-46,]),'INTEGER':([20,28,29,30,31,39,45,52,53,54,55,56,65,66,67,68,69,70,71,],[36,36,36,36,36,36,36,36,36,36,36,36,36,-30,-31,-32,-33,-34,-35,]),'DECIMAL':([20,28,29,30,31,39,45,52,53,54,55,56,65,66,67,68,69,70,71,],[37,37,37,37,37,37,37,37,37,37,37,37,37,-30,-31,-32,-33,-34,-35,]),'PLUS':([32,34,35,36,37,38,46,47,49,57,61,73,74,75,76,77,78,83,],[52,-38,-42,-43,-44,-45,52,52,52,52,52,-36,-37,-39,-40,-41,-46,52,]),'MINUS':([32,34,35,36,37,38,46,47,49,57,61,73,74,75,76,77,78,83,],[53,-38,-42,-43,-44,-45,53,53,53,53,53,-36,-37,-39,-40,-41,-46,53,]),'RPAREN':([34,35,36,37,38,43,47,48,50,57,73,74,75,76,77,78,83,],[-38,-42,-43,-44,-45,60,63,64,72,78,-36,-37,-39,-40,-41,-46,-29,]),'LESS':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,66,-36,-37,-39,-40,-41,-46,]),'LESS_EQ':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,67,-36,-37,-39,-40,-41,-46,]),'GREATER':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,68,-36,-37,-39,-40,-41,-46,]),'GREATER_EQ':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,69,-36,-37,-39,-40,-41,-46,]),'EQUAL_TO':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,70,-36,-37,-39,-40,-41,-46,]),'NOT_EQUAL':([34,35,36,37,38,49,73,74,75,76,77,78,],[-38,-42,-43,-44,-45,71,-36,-37,-39,-40,-41,-46,]),'MULTIPLY':([34,35,36,37,38,73,74,75,76,77,78,],[54,-42,-43,-44,-45,54,54,-39,-40,-41,-46,]),'DIVIDE':([34,35,36,37,38,73,74,75,76,77,78,],[55,-42,-43,-44,-45,55,55,-39,-40,-41,-46,]),'MOD':([34,35,36,37,38,73,74,75,76,77,78,],[56,-42,-43,-44,-45,56,56,-39,-40,-41,-46,]),'ELSE':([58,59,82,],[-26,-28,85,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[1,]),'stmt_sequence':([0,15,],[2,25,]),'stmt':([0,2,15,25,],[3,19,3,19,]),'var_decl':([0,2,15,25,],[4,4,4,4,]),'var_assign':([0,2,15,25,],[5,5,5,5,]),'output_stmt':([0,2,15,25,],[6,6,6,6,]),'conditional':([0,2,15,25,],[7,7,7,7,]),'loop':([0,2,15,25,],[8,8,8,8,]),'code_block':([0,2,15,25,50,58,70,],[9,9,9,9,67,69,71,]),'data_type':([0,2,15,25,],[10,10,10,10,]),'block_start':([0,2,15,25,50,58,70,],[15,15,15,15,15,15,15,]),'expr':([21,22,23,24,27,34,51,],[29,35,37,37,41,48,68,]),'term':([21,22,23,24,27,34,43,44,51,],[30,30,30,30,30,30,60,61,30,]),'base':([21,22,23,24,27,34,43,44,45,46,47,51,],[31,31,31,31,31,31,31,31,62,63,64,31,]),'comparison':([23,24,],[36,38,]),'block_end':([25,],[39,]),'rel_op':([37,],[51,]),}
+_lr_goto_items = {'start':([0,],[1,]),'function_list':([0,],[2,]),'stmt_sequence':([0,21,],[3,40,]),'function':([0,2,],[4,23,]),'stmt':([0,3,21,40,],[5,25,5,25,]),'data_type':([0,2,3,21,40,],[6,24,26,26,26,]),'code_block':([0,3,21,40,60,64,72,85,],[8,8,8,8,79,82,84,86,]),'var_decl':([0,3,21,40,],[9,9,9,9,]),'var_assign':([0,3,21,40,],[10,10,10,10,]),'output_stmt':([0,3,21,40,],[11,11,11,11,]),'conditional':([0,3,21,40,],[12,12,12,12,]),'loop':([0,3,21,40,],[13,13,13,13,]),'return_stmt':([0,3,21,40,],[14,14,14,14,]),'block_start':([0,3,21,40,60,64,72,85,],[21,21,21,21,21,21,21,21,]),'expr':([20,28,29,30,31,39,45,65,],[32,46,47,49,49,57,61,83,]),'term':([20,28,29,30,31,39,45,52,53,65,],[34,34,34,34,34,34,34,73,74,34,]),'base':([20,28,29,30,31,39,45,52,53,54,55,56,65,],[35,35,35,35,35,35,35,35,35,75,76,77,35,]),'comparison':([30,31,],[48,50,]),'block_end':([40,],[58,]),'rel_op':([49,],[65,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,43 +27,50 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> stmt_sequence','start',1,'p_start','parser.py',32),
-  ('stmt_sequence -> stmt_sequence stmt','stmt_sequence',2,'p_stmt_sequence','parser.py',37),
-  ('stmt_sequence -> stmt','stmt_sequence',1,'p_stmt_sequence','parser.py',38),
-  ('stmt -> var_decl','stmt',1,'p_stmt','parser.py',42),
-  ('stmt -> var_assign','stmt',1,'p_stmt','parser.py',43),
-  ('stmt -> output_stmt','stmt',1,'p_stmt','parser.py',44),
-  ('stmt -> conditional','stmt',1,'p_stmt','parser.py',45),
-  ('stmt -> loop','stmt',1,'p_stmt','parser.py',46),
-  ('stmt -> code_block','stmt',1,'p_stmt','parser.py',47),
-  ('var_decl -> data_type IDENTIFIER SEMICOLON','var_decl',3,'p_var_decl','parser.py',51),
-  ('var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON','var_decl',5,'p_var_decl','parser.py',52),
-  ('data_type -> INT','data_type',1,'p_data_type','parser.py',69),
-  ('data_type -> FLOAT','data_type',1,'p_data_type','parser.py',70),
-  ('var_assign -> IDENTIFIER EQUALS expr SEMICOLON','var_assign',4,'p_var_assign','parser.py',74),
-  ('output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON','output_stmt',5,'p_output_stmt','parser.py',83),
-  ('conditional -> IF LPAREN comparison RPAREN code_block','conditional',5,'p_conditional','parser.py',88),
-  ('conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block','conditional',7,'p_conditional','parser.py',89),
-  ('loop -> WHILE LPAREN comparison RPAREN code_block','loop',5,'p_loop','parser.py',108),
-  ('code_block -> block_start stmt_sequence block_end','code_block',3,'p_code_block','parser.py',119),
-  ('block_start -> LBRACE','block_start',1,'p_block_start','parser.py',123),
-  ('block_end -> RBRACE','block_end',1,'p_block_end','parser.py',129),
-  ('comparison -> expr rel_op expr','comparison',3,'p_comparison','parser.py',134),
-  ('rel_op -> LESS','rel_op',1,'p_rel_op','parser.py',140),
-  ('rel_op -> LESS_EQ','rel_op',1,'p_rel_op','parser.py',141),
-  ('rel_op -> GREATER','rel_op',1,'p_rel_op','parser.py',142),
-  ('rel_op -> GREATER_EQ','rel_op',1,'p_rel_op','parser.py',143),
-  ('rel_op -> EQUAL_TO','rel_op',1,'p_rel_op','parser.py',144),
-  ('rel_op -> NOT_EQUAL','rel_op',1,'p_rel_op','parser.py',145),
-  ('expr -> expr PLUS term','expr',3,'p_expr_add','parser.py',149),
-  ('expr -> expr MINUS term','expr',3,'p_expr_add','parser.py',150),
-  ('expr -> term','expr',1,'p_expr_term','parser.py',156),
-  ('term -> term MULTIPLY base','term',3,'p_term_mul','parser.py',160),
-  ('term -> term DIVIDE base','term',3,'p_term_mul','parser.py',161),
-  ('term -> term MOD base','term',3,'p_term_mul','parser.py',162),
-  ('term -> base','term',1,'p_term_base','parser.py',168),
-  ('base -> INTEGER','base',1,'p_base_num','parser.py',172),
-  ('base -> DECIMAL','base',1,'p_base_num','parser.py',173),
-  ('base -> IDENTIFIER','base',1,'p_base_id','parser.py',177),
-  ('base -> LPAREN expr RPAREN','base',3,'p_base_paren','parser.py',183),
+  ('start -> function_list','start',1,'p_start','parser.py',32),
+  ('start -> stmt_sequence','start',1,'p_start','parser.py',33),
+  ('function_list -> function_list function','function_list',2,'p_function_list','parser.py',38),
+  ('function_list -> function','function_list',1,'p_function_list','parser.py',39),
+  ('function -> data_type IDENTIFIER LPAREN RPAREN code_block','function',5,'p_function','parser.py',43),
+  ('stmt_sequence -> stmt_sequence stmt','stmt_sequence',2,'p_stmt_sequence','parser.py',50),
+  ('stmt_sequence -> stmt','stmt_sequence',1,'p_stmt_sequence','parser.py',51),
+  ('stmt -> var_decl','stmt',1,'p_stmt','parser.py',55),
+  ('stmt -> var_assign','stmt',1,'p_stmt','parser.py',56),
+  ('stmt -> output_stmt','stmt',1,'p_stmt','parser.py',57),
+  ('stmt -> conditional','stmt',1,'p_stmt','parser.py',58),
+  ('stmt -> loop','stmt',1,'p_stmt','parser.py',59),
+  ('stmt -> return_stmt','stmt',1,'p_stmt','parser.py',60),
+  ('stmt -> code_block','stmt',1,'p_stmt','parser.py',61),
+  ('return_stmt -> RETURN expr SEMICOLON','return_stmt',3,'p_return_stmt','parser.py',65),
+  ('return_stmt -> RETURN SEMICOLON','return_stmt',2,'p_return_stmt','parser.py',66),
+  ('var_decl -> data_type IDENTIFIER SEMICOLON','var_decl',3,'p_var_decl','parser.py',75),
+  ('var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON','var_decl',5,'p_var_decl','parser.py',76),
+  ('data_type -> INT','data_type',1,'p_data_type','parser.py',93),
+  ('data_type -> FLOAT','data_type',1,'p_data_type','parser.py',94),
+  ('var_assign -> IDENTIFIER EQUALS expr SEMICOLON','var_assign',4,'p_var_assign','parser.py',98),
+  ('output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON','output_stmt',5,'p_output_stmt','parser.py',107),
+  ('conditional -> IF LPAREN comparison RPAREN code_block','conditional',5,'p_conditional','parser.py',112),
+  ('conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block','conditional',7,'p_conditional','parser.py',113),
+  ('loop -> WHILE LPAREN comparison RPAREN code_block','loop',5,'p_loop','parser.py',130),
+  ('code_block -> block_start stmt_sequence block_end','code_block',3,'p_code_block','parser.py',141),
+  ('block_start -> LBRACE','block_start',1,'p_block_start','parser.py',145),
+  ('block_end -> RBRACE','block_end',1,'p_block_end','parser.py',151),
+  ('comparison -> expr rel_op expr','comparison',3,'p_comparison','parser.py',156),
+  ('rel_op -> LESS','rel_op',1,'p_rel_op','parser.py',162),
+  ('rel_op -> LESS_EQ','rel_op',1,'p_rel_op','parser.py',163),
+  ('rel_op -> GREATER','rel_op',1,'p_rel_op','parser.py',164),
+  ('rel_op -> GREATER_EQ','rel_op',1,'p_rel_op','parser.py',165),
+  ('rel_op -> EQUAL_TO','rel_op',1,'p_rel_op','parser.py',166),
+  ('rel_op -> NOT_EQUAL','rel_op',1,'p_rel_op','parser.py',167),
+  ('expr -> expr PLUS term','expr',3,'p_expr_add','parser.py',171),
+  ('expr -> expr MINUS term','expr',3,'p_expr_add','parser.py',172),
+  ('expr -> term','expr',1,'p_expr_term','parser.py',178),
+  ('term -> term MULTIPLY base','term',3,'p_term_mul','parser.py',182),
+  ('term -> term DIVIDE base','term',3,'p_term_mul','parser.py',183),
+  ('term -> term MOD base','term',3,'p_term_mul','parser.py',184),
+  ('term -> base','term',1,'p_term_base','parser.py',190),
+  ('base -> INTEGER','base',1,'p_base_num','parser.py',194),
+  ('base -> DECIMAL','base',1,'p_base_num','parser.py',195),
+  ('base -> IDENTIFIER','base',1,'p_base_id','parser.py',199),
+  ('base -> LPAREN expr RPAREN','base',3,'p_base_paren','parser.py',205),
 ]

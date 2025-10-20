@@ -4,149 +4,169 @@ Unused terminals:
 
     COMMA
     FOR
-    RETURN
 
 Grammar
 
 Rule 0     S' -> start
-Rule 1     start -> stmt_sequence
-Rule 2     stmt_sequence -> stmt_sequence stmt
-Rule 3     stmt_sequence -> stmt
-Rule 4     stmt -> var_decl
-Rule 5     stmt -> var_assign
-Rule 6     stmt -> output_stmt
-Rule 7     stmt -> conditional
-Rule 8     stmt -> loop
-Rule 9     stmt -> code_block
-Rule 10    var_decl -> data_type IDENTIFIER SEMICOLON
-Rule 11    var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON
-Rule 12    data_type -> INT
-Rule 13    data_type -> FLOAT
-Rule 14    var_assign -> IDENTIFIER EQUALS expr SEMICOLON
-Rule 15    output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON
-Rule 16    conditional -> IF LPAREN comparison RPAREN code_block
-Rule 17    conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block
-Rule 18    loop -> WHILE LPAREN comparison RPAREN code_block
-Rule 19    code_block -> block_start stmt_sequence block_end
-Rule 20    block_start -> LBRACE
-Rule 21    block_end -> RBRACE
-Rule 22    comparison -> expr rel_op expr
-Rule 23    rel_op -> LESS
-Rule 24    rel_op -> LESS_EQ
-Rule 25    rel_op -> GREATER
-Rule 26    rel_op -> GREATER_EQ
-Rule 27    rel_op -> EQUAL_TO
-Rule 28    rel_op -> NOT_EQUAL
-Rule 29    expr -> expr PLUS term
-Rule 30    expr -> expr MINUS term
-Rule 31    expr -> term
-Rule 32    term -> term MULTIPLY base
-Rule 33    term -> term DIVIDE base
-Rule 34    term -> term MOD base
-Rule 35    term -> base
-Rule 36    base -> INTEGER
-Rule 37    base -> DECIMAL
-Rule 38    base -> IDENTIFIER
-Rule 39    base -> LPAREN expr RPAREN
+Rule 1     start -> function_list
+Rule 2     start -> stmt_sequence
+Rule 3     function_list -> function_list function
+Rule 4     function_list -> function
+Rule 5     function -> data_type IDENTIFIER LPAREN RPAREN code_block
+Rule 6     stmt_sequence -> stmt_sequence stmt
+Rule 7     stmt_sequence -> stmt
+Rule 8     stmt -> var_decl
+Rule 9     stmt -> var_assign
+Rule 10    stmt -> output_stmt
+Rule 11    stmt -> conditional
+Rule 12    stmt -> loop
+Rule 13    stmt -> return_stmt
+Rule 14    stmt -> code_block
+Rule 15    return_stmt -> RETURN expr SEMICOLON
+Rule 16    return_stmt -> RETURN SEMICOLON
+Rule 17    var_decl -> data_type IDENTIFIER SEMICOLON
+Rule 18    var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON
+Rule 19    data_type -> INT
+Rule 20    data_type -> FLOAT
+Rule 21    var_assign -> IDENTIFIER EQUALS expr SEMICOLON
+Rule 22    output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON
+Rule 23    conditional -> IF LPAREN comparison RPAREN code_block
+Rule 24    conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block
+Rule 25    loop -> WHILE LPAREN comparison RPAREN code_block
+Rule 26    code_block -> block_start stmt_sequence block_end
+Rule 27    block_start -> LBRACE
+Rule 28    block_end -> RBRACE
+Rule 29    comparison -> expr rel_op expr
+Rule 30    rel_op -> LESS
+Rule 31    rel_op -> LESS_EQ
+Rule 32    rel_op -> GREATER
+Rule 33    rel_op -> GREATER_EQ
+Rule 34    rel_op -> EQUAL_TO
+Rule 35    rel_op -> NOT_EQUAL
+Rule 36    expr -> expr PLUS term
+Rule 37    expr -> expr MINUS term
+Rule 38    expr -> term
+Rule 39    term -> term MULTIPLY base
+Rule 40    term -> term DIVIDE base
+Rule 41    term -> term MOD base
+Rule 42    term -> base
+Rule 43    base -> INTEGER
+Rule 44    base -> DECIMAL
+Rule 45    base -> IDENTIFIER
+Rule 46    base -> LPAREN expr RPAREN
 
 Terminals, with rules where they appear
 
 COMMA                : 
-DECIMAL              : 37
-DIVIDE               : 33
-ELSE                 : 17
-EQUALS               : 11 14
-EQUAL_TO             : 27
-FLOAT                : 13
+DECIMAL              : 44
+DIVIDE               : 40
+ELSE                 : 24
+EQUALS               : 18 21
+EQUAL_TO             : 34
+FLOAT                : 20
 FOR                  : 
-GREATER              : 25
-GREATER_EQ           : 26
-IDENTIFIER           : 10 11 14 38
-IF                   : 16 17
-INT                  : 12
-INTEGER              : 36
-LBRACE               : 20
-LESS                 : 23
-LESS_EQ              : 24
-LPAREN               : 15 16 17 18 39
-MINUS                : 30
-MOD                  : 34
-MULTIPLY             : 32
-NOT_EQUAL            : 28
-PLUS                 : 29
-PRINT                : 15
-RBRACE               : 21
-RETURN               : 
-RPAREN               : 15 16 17 18 39
-SEMICOLON            : 10 11 14 15
-WHILE                : 18
+GREATER              : 32
+GREATER_EQ           : 33
+IDENTIFIER           : 5 17 18 21 45
+IF                   : 23 24
+INT                  : 19
+INTEGER              : 43
+LBRACE               : 27
+LESS                 : 30
+LESS_EQ              : 31
+LPAREN               : 5 22 23 24 25 46
+MINUS                : 37
+MOD                  : 41
+MULTIPLY             : 39
+NOT_EQUAL            : 35
+PLUS                 : 36
+PRINT                : 22
+RBRACE               : 28
+RETURN               : 15 16
+RPAREN               : 5 22 23 24 25 46
+SEMICOLON            : 15 16 17 18 21 22
+WHILE                : 25
 error                : 
 
 Nonterminals, with rules where they appear
 
-base                 : 32 33 34 35
-block_end            : 19
-block_start          : 19
-code_block           : 9 16 17 17 18
-comparison           : 16 17 18
-conditional          : 7
-data_type            : 10 11
-expr                 : 11 14 15 22 22 29 30 39
-loop                 : 8
-output_stmt          : 6
-rel_op               : 22
+base                 : 39 40 41 42
+block_end            : 26
+block_start          : 26
+code_block           : 5 14 23 24 24 25
+comparison           : 23 24 25
+conditional          : 11
+data_type            : 5 17 18
+expr                 : 15 18 21 22 29 29 36 37 46
+function             : 3 4
+function_list        : 1 3
+loop                 : 12
+output_stmt          : 10
+rel_op               : 29
+return_stmt          : 13
 start                : 0
-stmt                 : 2 3
-stmt_sequence        : 1 2 19
-term                 : 29 30 31 32 33 34
-var_assign           : 5
-var_decl             : 4
+stmt                 : 6 7
+stmt_sequence        : 2 6 26
+term                 : 36 37 38 39 40 41
+var_assign           : 9
+var_decl             : 8
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . start
-    (1) start -> . stmt_sequence
-    (2) stmt_sequence -> . stmt_sequence stmt
-    (3) stmt_sequence -> . stmt
-    (4) stmt -> . var_decl
-    (5) stmt -> . var_assign
-    (6) stmt -> . output_stmt
-    (7) stmt -> . conditional
-    (8) stmt -> . loop
-    (9) stmt -> . code_block
-    (10) var_decl -> . data_type IDENTIFIER SEMICOLON
-    (11) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
-    (14) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
-    (15) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
-    (16) conditional -> . IF LPAREN comparison RPAREN code_block
-    (17) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
-    (18) loop -> . WHILE LPAREN comparison RPAREN code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (12) data_type -> . INT
-    (13) data_type -> . FLOAT
-    (20) block_start -> . LBRACE
+    (1) start -> . function_list
+    (2) start -> . stmt_sequence
+    (3) function_list -> . function_list function
+    (4) function_list -> . function
+    (6) stmt_sequence -> . stmt_sequence stmt
+    (7) stmt_sequence -> . stmt
+    (5) function -> . data_type IDENTIFIER LPAREN RPAREN code_block
+    (8) stmt -> . var_decl
+    (9) stmt -> . var_assign
+    (10) stmt -> . output_stmt
+    (11) stmt -> . conditional
+    (12) stmt -> . loop
+    (13) stmt -> . return_stmt
+    (14) stmt -> . code_block
+    (19) data_type -> . INT
+    (20) data_type -> . FLOAT
+    (17) var_decl -> . data_type IDENTIFIER SEMICOLON
+    (18) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
+    (21) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
+    (22) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
+    (23) conditional -> . IF LPAREN comparison RPAREN code_block
+    (24) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
+    (25) loop -> . WHILE LPAREN comparison RPAREN code_block
+    (15) return_stmt -> . RETURN expr SEMICOLON
+    (16) return_stmt -> . RETURN SEMICOLON
+    (26) code_block -> . block_start stmt_sequence block_end
+    (27) block_start -> . LBRACE
 
-    IDENTIFIER      shift and go to state 11
-    PRINT           shift and go to state 12
-    IF              shift and go to state 13
-    WHILE           shift and go to state 14
-    INT             shift and go to state 16
-    FLOAT           shift and go to state 17
-    LBRACE          shift and go to state 18
+    INT             shift and go to state 15
+    FLOAT           shift and go to state 16
+    IDENTIFIER      shift and go to state 7
+    PRINT           shift and go to state 17
+    IF              shift and go to state 18
+    WHILE           shift and go to state 19
+    RETURN          shift and go to state 20
+    LBRACE          shift and go to state 22
 
     start                          shift and go to state 1
-    stmt_sequence                  shift and go to state 2
-    stmt                           shift and go to state 3
-    var_decl                       shift and go to state 4
-    var_assign                     shift and go to state 5
-    output_stmt                    shift and go to state 6
-    conditional                    shift and go to state 7
-    loop                           shift and go to state 8
-    code_block                     shift and go to state 9
-    data_type                      shift and go to state 10
-    block_start                    shift and go to state 15
+    function_list                  shift and go to state 2
+    stmt_sequence                  shift and go to state 3
+    function                       shift and go to state 4
+    stmt                           shift and go to state 5
+    data_type                      shift and go to state 6
+    code_block                     shift and go to state 8
+    var_decl                       shift and go to state 9
+    var_assign                     shift and go to state 10
+    output_stmt                    shift and go to state 11
+    conditional                    shift and go to state 12
+    loop                           shift and go to state 13
+    return_stmt                    shift and go to state 14
+    block_start                    shift and go to state 21
 
 state 1
 
@@ -156,1128 +176,1340 @@ state 1
 
 state 2
 
-    (1) start -> stmt_sequence .
-    (2) stmt_sequence -> stmt_sequence . stmt
-    (4) stmt -> . var_decl
-    (5) stmt -> . var_assign
-    (6) stmt -> . output_stmt
-    (7) stmt -> . conditional
-    (8) stmt -> . loop
-    (9) stmt -> . code_block
-    (10) var_decl -> . data_type IDENTIFIER SEMICOLON
-    (11) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
-    (14) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
-    (15) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
-    (16) conditional -> . IF LPAREN comparison RPAREN code_block
-    (17) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
-    (18) loop -> . WHILE LPAREN comparison RPAREN code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (12) data_type -> . INT
-    (13) data_type -> . FLOAT
-    (20) block_start -> . LBRACE
+    (1) start -> function_list .
+    (3) function_list -> function_list . function
+    (5) function -> . data_type IDENTIFIER LPAREN RPAREN code_block
+    (19) data_type -> . INT
+    (20) data_type -> . FLOAT
 
-    $end            reduce using rule 1 (start -> stmt_sequence .)
-    IDENTIFIER      shift and go to state 11
-    PRINT           shift and go to state 12
-    IF              shift and go to state 13
-    WHILE           shift and go to state 14
-    INT             shift and go to state 16
-    FLOAT           shift and go to state 17
-    LBRACE          shift and go to state 18
+    $end            reduce using rule 1 (start -> function_list .)
+    INT             shift and go to state 15
+    FLOAT           shift and go to state 16
 
-    stmt                           shift and go to state 19
-    var_decl                       shift and go to state 4
-    var_assign                     shift and go to state 5
-    output_stmt                    shift and go to state 6
-    conditional                    shift and go to state 7
-    loop                           shift and go to state 8
-    code_block                     shift and go to state 9
-    data_type                      shift and go to state 10
-    block_start                    shift and go to state 15
+    function                       shift and go to state 23
+    data_type                      shift and go to state 24
 
 state 3
 
-    (3) stmt_sequence -> stmt .
+    (2) start -> stmt_sequence .
+    (6) stmt_sequence -> stmt_sequence . stmt
+    (8) stmt -> . var_decl
+    (9) stmt -> . var_assign
+    (10) stmt -> . output_stmt
+    (11) stmt -> . conditional
+    (12) stmt -> . loop
+    (13) stmt -> . return_stmt
+    (14) stmt -> . code_block
+    (17) var_decl -> . data_type IDENTIFIER SEMICOLON
+    (18) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
+    (21) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
+    (22) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
+    (23) conditional -> . IF LPAREN comparison RPAREN code_block
+    (24) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
+    (25) loop -> . WHILE LPAREN comparison RPAREN code_block
+    (15) return_stmt -> . RETURN expr SEMICOLON
+    (16) return_stmt -> . RETURN SEMICOLON
+    (26) code_block -> . block_start stmt_sequence block_end
+    (19) data_type -> . INT
+    (20) data_type -> . FLOAT
+    (27) block_start -> . LBRACE
 
-    IDENTIFIER      reduce using rule 3 (stmt_sequence -> stmt .)
-    PRINT           reduce using rule 3 (stmt_sequence -> stmt .)
-    IF              reduce using rule 3 (stmt_sequence -> stmt .)
-    WHILE           reduce using rule 3 (stmt_sequence -> stmt .)
-    INT             reduce using rule 3 (stmt_sequence -> stmt .)
-    FLOAT           reduce using rule 3 (stmt_sequence -> stmt .)
-    LBRACE          reduce using rule 3 (stmt_sequence -> stmt .)
-    $end            reduce using rule 3 (stmt_sequence -> stmt .)
-    RBRACE          reduce using rule 3 (stmt_sequence -> stmt .)
+    $end            reduce using rule 2 (start -> stmt_sequence .)
+    IDENTIFIER      shift and go to state 7
+    PRINT           shift and go to state 17
+    IF              shift and go to state 18
+    WHILE           shift and go to state 19
+    RETURN          shift and go to state 20
+    INT             shift and go to state 15
+    FLOAT           shift and go to state 16
+    LBRACE          shift and go to state 22
 
+    stmt                           shift and go to state 25
+    var_decl                       shift and go to state 9
+    var_assign                     shift and go to state 10
+    output_stmt                    shift and go to state 11
+    conditional                    shift and go to state 12
+    loop                           shift and go to state 13
+    return_stmt                    shift and go to state 14
+    code_block                     shift and go to state 8
+    data_type                      shift and go to state 26
+    block_start                    shift and go to state 21
 
 state 4
 
-    (4) stmt -> var_decl .
+    (4) function_list -> function .
 
-    IDENTIFIER      reduce using rule 4 (stmt -> var_decl .)
-    PRINT           reduce using rule 4 (stmt -> var_decl .)
-    IF              reduce using rule 4 (stmt -> var_decl .)
-    WHILE           reduce using rule 4 (stmt -> var_decl .)
-    INT             reduce using rule 4 (stmt -> var_decl .)
-    FLOAT           reduce using rule 4 (stmt -> var_decl .)
-    LBRACE          reduce using rule 4 (stmt -> var_decl .)
-    $end            reduce using rule 4 (stmt -> var_decl .)
-    RBRACE          reduce using rule 4 (stmt -> var_decl .)
+    INT             reduce using rule 4 (function_list -> function .)
+    FLOAT           reduce using rule 4 (function_list -> function .)
+    $end            reduce using rule 4 (function_list -> function .)
 
 
 state 5
 
-    (5) stmt -> var_assign .
+    (7) stmt_sequence -> stmt .
 
-    IDENTIFIER      reduce using rule 5 (stmt -> var_assign .)
-    PRINT           reduce using rule 5 (stmt -> var_assign .)
-    IF              reduce using rule 5 (stmt -> var_assign .)
-    WHILE           reduce using rule 5 (stmt -> var_assign .)
-    INT             reduce using rule 5 (stmt -> var_assign .)
-    FLOAT           reduce using rule 5 (stmt -> var_assign .)
-    LBRACE          reduce using rule 5 (stmt -> var_assign .)
-    $end            reduce using rule 5 (stmt -> var_assign .)
-    RBRACE          reduce using rule 5 (stmt -> var_assign .)
+    IDENTIFIER      reduce using rule 7 (stmt_sequence -> stmt .)
+    PRINT           reduce using rule 7 (stmt_sequence -> stmt .)
+    IF              reduce using rule 7 (stmt_sequence -> stmt .)
+    WHILE           reduce using rule 7 (stmt_sequence -> stmt .)
+    RETURN          reduce using rule 7 (stmt_sequence -> stmt .)
+    INT             reduce using rule 7 (stmt_sequence -> stmt .)
+    FLOAT           reduce using rule 7 (stmt_sequence -> stmt .)
+    LBRACE          reduce using rule 7 (stmt_sequence -> stmt .)
+    $end            reduce using rule 7 (stmt_sequence -> stmt .)
+    RBRACE          reduce using rule 7 (stmt_sequence -> stmt .)
 
 
 state 6
 
-    (6) stmt -> output_stmt .
+    (5) function -> data_type . IDENTIFIER LPAREN RPAREN code_block
+    (17) var_decl -> data_type . IDENTIFIER SEMICOLON
+    (18) var_decl -> data_type . IDENTIFIER EQUALS expr SEMICOLON
 
-    IDENTIFIER      reduce using rule 6 (stmt -> output_stmt .)
-    PRINT           reduce using rule 6 (stmt -> output_stmt .)
-    IF              reduce using rule 6 (stmt -> output_stmt .)
-    WHILE           reduce using rule 6 (stmt -> output_stmt .)
-    INT             reduce using rule 6 (stmt -> output_stmt .)
-    FLOAT           reduce using rule 6 (stmt -> output_stmt .)
-    LBRACE          reduce using rule 6 (stmt -> output_stmt .)
-    $end            reduce using rule 6 (stmt -> output_stmt .)
-    RBRACE          reduce using rule 6 (stmt -> output_stmt .)
+    IDENTIFIER      shift and go to state 27
 
 
 state 7
 
-    (7) stmt -> conditional .
+    (21) var_assign -> IDENTIFIER . EQUALS expr SEMICOLON
 
-    IDENTIFIER      reduce using rule 7 (stmt -> conditional .)
-    PRINT           reduce using rule 7 (stmt -> conditional .)
-    IF              reduce using rule 7 (stmt -> conditional .)
-    WHILE           reduce using rule 7 (stmt -> conditional .)
-    INT             reduce using rule 7 (stmt -> conditional .)
-    FLOAT           reduce using rule 7 (stmt -> conditional .)
-    LBRACE          reduce using rule 7 (stmt -> conditional .)
-    $end            reduce using rule 7 (stmt -> conditional .)
-    RBRACE          reduce using rule 7 (stmt -> conditional .)
+    EQUALS          shift and go to state 28
 
 
 state 8
 
-    (8) stmt -> loop .
+    (14) stmt -> code_block .
 
-    IDENTIFIER      reduce using rule 8 (stmt -> loop .)
-    PRINT           reduce using rule 8 (stmt -> loop .)
-    IF              reduce using rule 8 (stmt -> loop .)
-    WHILE           reduce using rule 8 (stmt -> loop .)
-    INT             reduce using rule 8 (stmt -> loop .)
-    FLOAT           reduce using rule 8 (stmt -> loop .)
-    LBRACE          reduce using rule 8 (stmt -> loop .)
-    $end            reduce using rule 8 (stmt -> loop .)
-    RBRACE          reduce using rule 8 (stmt -> loop .)
+    IDENTIFIER      reduce using rule 14 (stmt -> code_block .)
+    PRINT           reduce using rule 14 (stmt -> code_block .)
+    IF              reduce using rule 14 (stmt -> code_block .)
+    WHILE           reduce using rule 14 (stmt -> code_block .)
+    RETURN          reduce using rule 14 (stmt -> code_block .)
+    INT             reduce using rule 14 (stmt -> code_block .)
+    FLOAT           reduce using rule 14 (stmt -> code_block .)
+    LBRACE          reduce using rule 14 (stmt -> code_block .)
+    $end            reduce using rule 14 (stmt -> code_block .)
+    RBRACE          reduce using rule 14 (stmt -> code_block .)
 
 
 state 9
 
-    (9) stmt -> code_block .
+    (8) stmt -> var_decl .
 
-    IDENTIFIER      reduce using rule 9 (stmt -> code_block .)
-    PRINT           reduce using rule 9 (stmt -> code_block .)
-    IF              reduce using rule 9 (stmt -> code_block .)
-    WHILE           reduce using rule 9 (stmt -> code_block .)
-    INT             reduce using rule 9 (stmt -> code_block .)
-    FLOAT           reduce using rule 9 (stmt -> code_block .)
-    LBRACE          reduce using rule 9 (stmt -> code_block .)
-    $end            reduce using rule 9 (stmt -> code_block .)
-    RBRACE          reduce using rule 9 (stmt -> code_block .)
+    IDENTIFIER      reduce using rule 8 (stmt -> var_decl .)
+    PRINT           reduce using rule 8 (stmt -> var_decl .)
+    IF              reduce using rule 8 (stmt -> var_decl .)
+    WHILE           reduce using rule 8 (stmt -> var_decl .)
+    RETURN          reduce using rule 8 (stmt -> var_decl .)
+    INT             reduce using rule 8 (stmt -> var_decl .)
+    FLOAT           reduce using rule 8 (stmt -> var_decl .)
+    LBRACE          reduce using rule 8 (stmt -> var_decl .)
+    $end            reduce using rule 8 (stmt -> var_decl .)
+    RBRACE          reduce using rule 8 (stmt -> var_decl .)
 
 
 state 10
 
-    (10) var_decl -> data_type . IDENTIFIER SEMICOLON
-    (11) var_decl -> data_type . IDENTIFIER EQUALS expr SEMICOLON
+    (9) stmt -> var_assign .
 
-    IDENTIFIER      shift and go to state 20
+    IDENTIFIER      reduce using rule 9 (stmt -> var_assign .)
+    PRINT           reduce using rule 9 (stmt -> var_assign .)
+    IF              reduce using rule 9 (stmt -> var_assign .)
+    WHILE           reduce using rule 9 (stmt -> var_assign .)
+    RETURN          reduce using rule 9 (stmt -> var_assign .)
+    INT             reduce using rule 9 (stmt -> var_assign .)
+    FLOAT           reduce using rule 9 (stmt -> var_assign .)
+    LBRACE          reduce using rule 9 (stmt -> var_assign .)
+    $end            reduce using rule 9 (stmt -> var_assign .)
+    RBRACE          reduce using rule 9 (stmt -> var_assign .)
 
 
 state 11
 
-    (14) var_assign -> IDENTIFIER . EQUALS expr SEMICOLON
+    (10) stmt -> output_stmt .
 
-    EQUALS          shift and go to state 21
+    IDENTIFIER      reduce using rule 10 (stmt -> output_stmt .)
+    PRINT           reduce using rule 10 (stmt -> output_stmt .)
+    IF              reduce using rule 10 (stmt -> output_stmt .)
+    WHILE           reduce using rule 10 (stmt -> output_stmt .)
+    RETURN          reduce using rule 10 (stmt -> output_stmt .)
+    INT             reduce using rule 10 (stmt -> output_stmt .)
+    FLOAT           reduce using rule 10 (stmt -> output_stmt .)
+    LBRACE          reduce using rule 10 (stmt -> output_stmt .)
+    $end            reduce using rule 10 (stmt -> output_stmt .)
+    RBRACE          reduce using rule 10 (stmt -> output_stmt .)
 
 
 state 12
 
-    (15) output_stmt -> PRINT . LPAREN expr RPAREN SEMICOLON
+    (11) stmt -> conditional .
 
-    LPAREN          shift and go to state 22
+    IDENTIFIER      reduce using rule 11 (stmt -> conditional .)
+    PRINT           reduce using rule 11 (stmt -> conditional .)
+    IF              reduce using rule 11 (stmt -> conditional .)
+    WHILE           reduce using rule 11 (stmt -> conditional .)
+    RETURN          reduce using rule 11 (stmt -> conditional .)
+    INT             reduce using rule 11 (stmt -> conditional .)
+    FLOAT           reduce using rule 11 (stmt -> conditional .)
+    LBRACE          reduce using rule 11 (stmt -> conditional .)
+    $end            reduce using rule 11 (stmt -> conditional .)
+    RBRACE          reduce using rule 11 (stmt -> conditional .)
 
 
 state 13
 
-    (16) conditional -> IF . LPAREN comparison RPAREN code_block
-    (17) conditional -> IF . LPAREN comparison RPAREN code_block ELSE code_block
+    (12) stmt -> loop .
 
-    LPAREN          shift and go to state 23
+    IDENTIFIER      reduce using rule 12 (stmt -> loop .)
+    PRINT           reduce using rule 12 (stmt -> loop .)
+    IF              reduce using rule 12 (stmt -> loop .)
+    WHILE           reduce using rule 12 (stmt -> loop .)
+    RETURN          reduce using rule 12 (stmt -> loop .)
+    INT             reduce using rule 12 (stmt -> loop .)
+    FLOAT           reduce using rule 12 (stmt -> loop .)
+    LBRACE          reduce using rule 12 (stmt -> loop .)
+    $end            reduce using rule 12 (stmt -> loop .)
+    RBRACE          reduce using rule 12 (stmt -> loop .)
 
 
 state 14
 
-    (18) loop -> WHILE . LPAREN comparison RPAREN code_block
+    (13) stmt -> return_stmt .
 
-    LPAREN          shift and go to state 24
+    IDENTIFIER      reduce using rule 13 (stmt -> return_stmt .)
+    PRINT           reduce using rule 13 (stmt -> return_stmt .)
+    IF              reduce using rule 13 (stmt -> return_stmt .)
+    WHILE           reduce using rule 13 (stmt -> return_stmt .)
+    RETURN          reduce using rule 13 (stmt -> return_stmt .)
+    INT             reduce using rule 13 (stmt -> return_stmt .)
+    FLOAT           reduce using rule 13 (stmt -> return_stmt .)
+    LBRACE          reduce using rule 13 (stmt -> return_stmt .)
+    $end            reduce using rule 13 (stmt -> return_stmt .)
+    RBRACE          reduce using rule 13 (stmt -> return_stmt .)
 
 
 state 15
 
-    (19) code_block -> block_start . stmt_sequence block_end
-    (2) stmt_sequence -> . stmt_sequence stmt
-    (3) stmt_sequence -> . stmt
-    (4) stmt -> . var_decl
-    (5) stmt -> . var_assign
-    (6) stmt -> . output_stmt
-    (7) stmt -> . conditional
-    (8) stmt -> . loop
-    (9) stmt -> . code_block
-    (10) var_decl -> . data_type IDENTIFIER SEMICOLON
-    (11) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
-    (14) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
-    (15) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
-    (16) conditional -> . IF LPAREN comparison RPAREN code_block
-    (17) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
-    (18) loop -> . WHILE LPAREN comparison RPAREN code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (12) data_type -> . INT
-    (13) data_type -> . FLOAT
-    (20) block_start -> . LBRACE
+    (19) data_type -> INT .
 
-    IDENTIFIER      shift and go to state 11
-    PRINT           shift and go to state 12
-    IF              shift and go to state 13
-    WHILE           shift and go to state 14
-    INT             shift and go to state 16
-    FLOAT           shift and go to state 17
-    LBRACE          shift and go to state 18
+    IDENTIFIER      reduce using rule 19 (data_type -> INT .)
 
-    block_start                    shift and go to state 15
-    stmt_sequence                  shift and go to state 25
-    stmt                           shift and go to state 3
-    var_decl                       shift and go to state 4
-    var_assign                     shift and go to state 5
-    output_stmt                    shift and go to state 6
-    conditional                    shift and go to state 7
-    loop                           shift and go to state 8
-    code_block                     shift and go to state 9
-    data_type                      shift and go to state 10
 
 state 16
 
-    (12) data_type -> INT .
+    (20) data_type -> FLOAT .
 
-    IDENTIFIER      reduce using rule 12 (data_type -> INT .)
+    IDENTIFIER      reduce using rule 20 (data_type -> FLOAT .)
 
 
 state 17
 
-    (13) data_type -> FLOAT .
+    (22) output_stmt -> PRINT . LPAREN expr RPAREN SEMICOLON
 
-    IDENTIFIER      reduce using rule 13 (data_type -> FLOAT .)
+    LPAREN          shift and go to state 29
 
 
 state 18
 
-    (20) block_start -> LBRACE .
+    (23) conditional -> IF . LPAREN comparison RPAREN code_block
+    (24) conditional -> IF . LPAREN comparison RPAREN code_block ELSE code_block
 
-    IDENTIFIER      reduce using rule 20 (block_start -> LBRACE .)
-    PRINT           reduce using rule 20 (block_start -> LBRACE .)
-    IF              reduce using rule 20 (block_start -> LBRACE .)
-    WHILE           reduce using rule 20 (block_start -> LBRACE .)
-    INT             reduce using rule 20 (block_start -> LBRACE .)
-    FLOAT           reduce using rule 20 (block_start -> LBRACE .)
-    LBRACE          reduce using rule 20 (block_start -> LBRACE .)
+    LPAREN          shift and go to state 30
 
 
 state 19
 
-    (2) stmt_sequence -> stmt_sequence stmt .
+    (25) loop -> WHILE . LPAREN comparison RPAREN code_block
 
-    IDENTIFIER      reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    PRINT           reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    IF              reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    WHILE           reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    INT             reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    FLOAT           reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    LBRACE          reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    $end            reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
-    RBRACE          reduce using rule 2 (stmt_sequence -> stmt_sequence stmt .)
+    LPAREN          shift and go to state 31
 
 
 state 20
 
-    (10) var_decl -> data_type IDENTIFIER . SEMICOLON
-    (11) var_decl -> data_type IDENTIFIER . EQUALS expr SEMICOLON
+    (15) return_stmt -> RETURN . expr SEMICOLON
+    (16) return_stmt -> RETURN . SEMICOLON
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    SEMICOLON       shift and go to state 26
-    EQUALS          shift and go to state 27
+    SEMICOLON       shift and go to state 33
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    expr                           shift and go to state 32
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 21
 
-    (14) var_assign -> IDENTIFIER EQUALS . expr SEMICOLON
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (26) code_block -> block_start . stmt_sequence block_end
+    (6) stmt_sequence -> . stmt_sequence stmt
+    (7) stmt_sequence -> . stmt
+    (8) stmt -> . var_decl
+    (9) stmt -> . var_assign
+    (10) stmt -> . output_stmt
+    (11) stmt -> . conditional
+    (12) stmt -> . loop
+    (13) stmt -> . return_stmt
+    (14) stmt -> . code_block
+    (17) var_decl -> . data_type IDENTIFIER SEMICOLON
+    (18) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
+    (21) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
+    (22) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
+    (23) conditional -> . IF LPAREN comparison RPAREN code_block
+    (24) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
+    (25) loop -> . WHILE LPAREN comparison RPAREN code_block
+    (15) return_stmt -> . RETURN expr SEMICOLON
+    (16) return_stmt -> . RETURN SEMICOLON
+    (26) code_block -> . block_start stmt_sequence block_end
+    (19) data_type -> . INT
+    (20) data_type -> . FLOAT
+    (27) block_start -> . LBRACE
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    IDENTIFIER      shift and go to state 7
+    PRINT           shift and go to state 17
+    IF              shift and go to state 18
+    WHILE           shift and go to state 19
+    RETURN          shift and go to state 20
+    INT             shift and go to state 15
+    FLOAT           shift and go to state 16
+    LBRACE          shift and go to state 22
 
-    expr                           shift and go to state 29
-    term                           shift and go to state 30
-    base                           shift and go to state 31
+    block_start                    shift and go to state 21
+    stmt_sequence                  shift and go to state 40
+    stmt                           shift and go to state 5
+    var_decl                       shift and go to state 9
+    var_assign                     shift and go to state 10
+    output_stmt                    shift and go to state 11
+    conditional                    shift and go to state 12
+    loop                           shift and go to state 13
+    return_stmt                    shift and go to state 14
+    code_block                     shift and go to state 8
+    data_type                      shift and go to state 26
 
 state 22
 
-    (15) output_stmt -> PRINT LPAREN . expr RPAREN SEMICOLON
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (27) block_start -> LBRACE .
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    IDENTIFIER      reduce using rule 27 (block_start -> LBRACE .)
+    PRINT           reduce using rule 27 (block_start -> LBRACE .)
+    IF              reduce using rule 27 (block_start -> LBRACE .)
+    WHILE           reduce using rule 27 (block_start -> LBRACE .)
+    RETURN          reduce using rule 27 (block_start -> LBRACE .)
+    INT             reduce using rule 27 (block_start -> LBRACE .)
+    FLOAT           reduce using rule 27 (block_start -> LBRACE .)
+    LBRACE          reduce using rule 27 (block_start -> LBRACE .)
 
-    expr                           shift and go to state 35
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 23
 
-    (16) conditional -> IF LPAREN . comparison RPAREN code_block
-    (17) conditional -> IF LPAREN . comparison RPAREN code_block ELSE code_block
-    (22) comparison -> . expr rel_op expr
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (3) function_list -> function_list function .
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    INT             reduce using rule 3 (function_list -> function_list function .)
+    FLOAT           reduce using rule 3 (function_list -> function_list function .)
+    $end            reduce using rule 3 (function_list -> function_list function .)
 
-    comparison                     shift and go to state 36
-    expr                           shift and go to state 37
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 24
 
-    (18) loop -> WHILE LPAREN . comparison RPAREN code_block
-    (22) comparison -> . expr rel_op expr
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (5) function -> data_type . IDENTIFIER LPAREN RPAREN code_block
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    IDENTIFIER      shift and go to state 41
 
-    comparison                     shift and go to state 38
-    expr                           shift and go to state 37
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 25
 
-    (19) code_block -> block_start stmt_sequence . block_end
-    (2) stmt_sequence -> stmt_sequence . stmt
-    (21) block_end -> . RBRACE
-    (4) stmt -> . var_decl
-    (5) stmt -> . var_assign
-    (6) stmt -> . output_stmt
-    (7) stmt -> . conditional
-    (8) stmt -> . loop
-    (9) stmt -> . code_block
-    (10) var_decl -> . data_type IDENTIFIER SEMICOLON
-    (11) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
-    (14) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
-    (15) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
-    (16) conditional -> . IF LPAREN comparison RPAREN code_block
-    (17) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
-    (18) loop -> . WHILE LPAREN comparison RPAREN code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (12) data_type -> . INT
-    (13) data_type -> . FLOAT
-    (20) block_start -> . LBRACE
+    (6) stmt_sequence -> stmt_sequence stmt .
 
-    RBRACE          shift and go to state 40
-    IDENTIFIER      shift and go to state 11
-    PRINT           shift and go to state 12
-    IF              shift and go to state 13
-    WHILE           shift and go to state 14
-    INT             shift and go to state 16
-    FLOAT           shift and go to state 17
-    LBRACE          shift and go to state 18
+    IDENTIFIER      reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    PRINT           reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    IF              reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    WHILE           reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    RETURN          reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    INT             reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    FLOAT           reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    LBRACE          reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    $end            reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
+    RBRACE          reduce using rule 6 (stmt_sequence -> stmt_sequence stmt .)
 
-    block_start                    shift and go to state 15
-    block_end                      shift and go to state 39
-    stmt                           shift and go to state 19
-    var_decl                       shift and go to state 4
-    var_assign                     shift and go to state 5
-    output_stmt                    shift and go to state 6
-    conditional                    shift and go to state 7
-    loop                           shift and go to state 8
-    code_block                     shift and go to state 9
-    data_type                      shift and go to state 10
 
 state 26
 
-    (10) var_decl -> data_type IDENTIFIER SEMICOLON .
+    (17) var_decl -> data_type . IDENTIFIER SEMICOLON
+    (18) var_decl -> data_type . IDENTIFIER EQUALS expr SEMICOLON
 
-    IDENTIFIER      reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    PRINT           reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    IF              reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    WHILE           reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    INT             reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    FLOAT           reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    LBRACE          reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    $end            reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
-    RBRACE          reduce using rule 10 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    IDENTIFIER      shift and go to state 42
 
 
 state 27
 
-    (11) var_decl -> data_type IDENTIFIER EQUALS . expr SEMICOLON
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (5) function -> data_type IDENTIFIER . LPAREN RPAREN code_block
+    (17) var_decl -> data_type IDENTIFIER . SEMICOLON
+    (18) var_decl -> data_type IDENTIFIER . EQUALS expr SEMICOLON
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    LPAREN          shift and go to state 43
+    SEMICOLON       shift and go to state 44
+    EQUALS          shift and go to state 45
 
-    expr                           shift and go to state 41
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 28
 
-    (38) base -> IDENTIFIER .
+    (21) var_assign -> IDENTIFIER EQUALS . expr SEMICOLON
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    MULTIPLY        reduce using rule 38 (base -> IDENTIFIER .)
-    DIVIDE          reduce using rule 38 (base -> IDENTIFIER .)
-    MOD             reduce using rule 38 (base -> IDENTIFIER .)
-    SEMICOLON       reduce using rule 38 (base -> IDENTIFIER .)
-    PLUS            reduce using rule 38 (base -> IDENTIFIER .)
-    MINUS           reduce using rule 38 (base -> IDENTIFIER .)
-    RPAREN          reduce using rule 38 (base -> IDENTIFIER .)
-    LESS            reduce using rule 38 (base -> IDENTIFIER .)
-    LESS_EQ         reduce using rule 38 (base -> IDENTIFIER .)
-    GREATER         reduce using rule 38 (base -> IDENTIFIER .)
-    GREATER_EQ      reduce using rule 38 (base -> IDENTIFIER .)
-    EQUAL_TO        reduce using rule 38 (base -> IDENTIFIER .)
-    NOT_EQUAL       reduce using rule 38 (base -> IDENTIFIER .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    expr                           shift and go to state 46
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 29
 
-    (14) var_assign -> IDENTIFIER EQUALS expr . SEMICOLON
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
+    (22) output_stmt -> PRINT LPAREN . expr RPAREN SEMICOLON
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    SEMICOLON       shift and go to state 42
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    expr                           shift and go to state 47
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 30
 
-    (31) expr -> term .
-    (32) term -> term . MULTIPLY base
-    (33) term -> term . DIVIDE base
-    (34) term -> term . MOD base
+    (23) conditional -> IF LPAREN . comparison RPAREN code_block
+    (24) conditional -> IF LPAREN . comparison RPAREN code_block ELSE code_block
+    (29) comparison -> . expr rel_op expr
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    SEMICOLON       reduce using rule 31 (expr -> term .)
-    PLUS            reduce using rule 31 (expr -> term .)
-    MINUS           reduce using rule 31 (expr -> term .)
-    RPAREN          reduce using rule 31 (expr -> term .)
-    LESS            reduce using rule 31 (expr -> term .)
-    LESS_EQ         reduce using rule 31 (expr -> term .)
-    GREATER         reduce using rule 31 (expr -> term .)
-    GREATER_EQ      reduce using rule 31 (expr -> term .)
-    EQUAL_TO        reduce using rule 31 (expr -> term .)
-    NOT_EQUAL       reduce using rule 31 (expr -> term .)
-    MULTIPLY        shift and go to state 45
-    DIVIDE          shift and go to state 46
-    MOD             shift and go to state 47
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    comparison                     shift and go to state 48
+    expr                           shift and go to state 49
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 31
 
-    (35) term -> base .
+    (25) loop -> WHILE LPAREN . comparison RPAREN code_block
+    (29) comparison -> . expr rel_op expr
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    MULTIPLY        reduce using rule 35 (term -> base .)
-    DIVIDE          reduce using rule 35 (term -> base .)
-    MOD             reduce using rule 35 (term -> base .)
-    SEMICOLON       reduce using rule 35 (term -> base .)
-    PLUS            reduce using rule 35 (term -> base .)
-    MINUS           reduce using rule 35 (term -> base .)
-    RPAREN          reduce using rule 35 (term -> base .)
-    LESS            reduce using rule 35 (term -> base .)
-    LESS_EQ         reduce using rule 35 (term -> base .)
-    GREATER         reduce using rule 35 (term -> base .)
-    GREATER_EQ      reduce using rule 35 (term -> base .)
-    EQUAL_TO        reduce using rule 35 (term -> base .)
-    NOT_EQUAL       reduce using rule 35 (term -> base .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    comparison                     shift and go to state 50
+    expr                           shift and go to state 49
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 32
 
-    (36) base -> INTEGER .
+    (15) return_stmt -> RETURN expr . SEMICOLON
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
 
-    MULTIPLY        reduce using rule 36 (base -> INTEGER .)
-    DIVIDE          reduce using rule 36 (base -> INTEGER .)
-    MOD             reduce using rule 36 (base -> INTEGER .)
-    SEMICOLON       reduce using rule 36 (base -> INTEGER .)
-    PLUS            reduce using rule 36 (base -> INTEGER .)
-    MINUS           reduce using rule 36 (base -> INTEGER .)
-    RPAREN          reduce using rule 36 (base -> INTEGER .)
-    LESS            reduce using rule 36 (base -> INTEGER .)
-    LESS_EQ         reduce using rule 36 (base -> INTEGER .)
-    GREATER         reduce using rule 36 (base -> INTEGER .)
-    GREATER_EQ      reduce using rule 36 (base -> INTEGER .)
-    EQUAL_TO        reduce using rule 36 (base -> INTEGER .)
-    NOT_EQUAL       reduce using rule 36 (base -> INTEGER .)
+    SEMICOLON       shift and go to state 51
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
 
 
 state 33
 
-    (37) base -> DECIMAL .
+    (16) return_stmt -> RETURN SEMICOLON .
 
-    MULTIPLY        reduce using rule 37 (base -> DECIMAL .)
-    DIVIDE          reduce using rule 37 (base -> DECIMAL .)
-    MOD             reduce using rule 37 (base -> DECIMAL .)
-    SEMICOLON       reduce using rule 37 (base -> DECIMAL .)
-    PLUS            reduce using rule 37 (base -> DECIMAL .)
-    MINUS           reduce using rule 37 (base -> DECIMAL .)
-    RPAREN          reduce using rule 37 (base -> DECIMAL .)
-    LESS            reduce using rule 37 (base -> DECIMAL .)
-    LESS_EQ         reduce using rule 37 (base -> DECIMAL .)
-    GREATER         reduce using rule 37 (base -> DECIMAL .)
-    GREATER_EQ      reduce using rule 37 (base -> DECIMAL .)
-    EQUAL_TO        reduce using rule 37 (base -> DECIMAL .)
-    NOT_EQUAL       reduce using rule 37 (base -> DECIMAL .)
+    IDENTIFIER      reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    PRINT           reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    IF              reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    WHILE           reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    RETURN          reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    INT             reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    FLOAT           reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    LBRACE          reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    $end            reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
+    RBRACE          reduce using rule 16 (return_stmt -> RETURN SEMICOLON .)
 
 
 state 34
 
-    (39) base -> LPAREN . expr RPAREN
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (38) expr -> term .
+    (39) term -> term . MULTIPLY base
+    (40) term -> term . DIVIDE base
+    (41) term -> term . MOD base
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    SEMICOLON       reduce using rule 38 (expr -> term .)
+    PLUS            reduce using rule 38 (expr -> term .)
+    MINUS           reduce using rule 38 (expr -> term .)
+    RPAREN          reduce using rule 38 (expr -> term .)
+    LESS            reduce using rule 38 (expr -> term .)
+    LESS_EQ         reduce using rule 38 (expr -> term .)
+    GREATER         reduce using rule 38 (expr -> term .)
+    GREATER_EQ      reduce using rule 38 (expr -> term .)
+    EQUAL_TO        reduce using rule 38 (expr -> term .)
+    NOT_EQUAL       reduce using rule 38 (expr -> term .)
+    MULTIPLY        shift and go to state 54
+    DIVIDE          shift and go to state 55
+    MOD             shift and go to state 56
 
-    expr                           shift and go to state 48
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 35
 
-    (15) output_stmt -> PRINT LPAREN expr . RPAREN SEMICOLON
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
+    (42) term -> base .
 
-    RPAREN          shift and go to state 49
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
+    MULTIPLY        reduce using rule 42 (term -> base .)
+    DIVIDE          reduce using rule 42 (term -> base .)
+    MOD             reduce using rule 42 (term -> base .)
+    SEMICOLON       reduce using rule 42 (term -> base .)
+    PLUS            reduce using rule 42 (term -> base .)
+    MINUS           reduce using rule 42 (term -> base .)
+    RPAREN          reduce using rule 42 (term -> base .)
+    LESS            reduce using rule 42 (term -> base .)
+    LESS_EQ         reduce using rule 42 (term -> base .)
+    GREATER         reduce using rule 42 (term -> base .)
+    GREATER_EQ      reduce using rule 42 (term -> base .)
+    EQUAL_TO        reduce using rule 42 (term -> base .)
+    NOT_EQUAL       reduce using rule 42 (term -> base .)
 
 
 state 36
 
-    (16) conditional -> IF LPAREN comparison . RPAREN code_block
-    (17) conditional -> IF LPAREN comparison . RPAREN code_block ELSE code_block
+    (43) base -> INTEGER .
 
-    RPAREN          shift and go to state 50
+    MULTIPLY        reduce using rule 43 (base -> INTEGER .)
+    DIVIDE          reduce using rule 43 (base -> INTEGER .)
+    MOD             reduce using rule 43 (base -> INTEGER .)
+    SEMICOLON       reduce using rule 43 (base -> INTEGER .)
+    PLUS            reduce using rule 43 (base -> INTEGER .)
+    MINUS           reduce using rule 43 (base -> INTEGER .)
+    RPAREN          reduce using rule 43 (base -> INTEGER .)
+    LESS            reduce using rule 43 (base -> INTEGER .)
+    LESS_EQ         reduce using rule 43 (base -> INTEGER .)
+    GREATER         reduce using rule 43 (base -> INTEGER .)
+    GREATER_EQ      reduce using rule 43 (base -> INTEGER .)
+    EQUAL_TO        reduce using rule 43 (base -> INTEGER .)
+    NOT_EQUAL       reduce using rule 43 (base -> INTEGER .)
 
 
 state 37
 
-    (22) comparison -> expr . rel_op expr
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
-    (23) rel_op -> . LESS
-    (24) rel_op -> . LESS_EQ
-    (25) rel_op -> . GREATER
-    (26) rel_op -> . GREATER_EQ
-    (27) rel_op -> . EQUAL_TO
-    (28) rel_op -> . NOT_EQUAL
+    (44) base -> DECIMAL .
 
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
-    LESS            shift and go to state 52
-    LESS_EQ         shift and go to state 53
-    GREATER         shift and go to state 54
-    GREATER_EQ      shift and go to state 55
-    EQUAL_TO        shift and go to state 56
-    NOT_EQUAL       shift and go to state 57
+    MULTIPLY        reduce using rule 44 (base -> DECIMAL .)
+    DIVIDE          reduce using rule 44 (base -> DECIMAL .)
+    MOD             reduce using rule 44 (base -> DECIMAL .)
+    SEMICOLON       reduce using rule 44 (base -> DECIMAL .)
+    PLUS            reduce using rule 44 (base -> DECIMAL .)
+    MINUS           reduce using rule 44 (base -> DECIMAL .)
+    RPAREN          reduce using rule 44 (base -> DECIMAL .)
+    LESS            reduce using rule 44 (base -> DECIMAL .)
+    LESS_EQ         reduce using rule 44 (base -> DECIMAL .)
+    GREATER         reduce using rule 44 (base -> DECIMAL .)
+    GREATER_EQ      reduce using rule 44 (base -> DECIMAL .)
+    EQUAL_TO        reduce using rule 44 (base -> DECIMAL .)
+    NOT_EQUAL       reduce using rule 44 (base -> DECIMAL .)
 
-    rel_op                         shift and go to state 51
 
 state 38
 
-    (18) loop -> WHILE LPAREN comparison . RPAREN code_block
+    (45) base -> IDENTIFIER .
 
-    RPAREN          shift and go to state 58
+    MULTIPLY        reduce using rule 45 (base -> IDENTIFIER .)
+    DIVIDE          reduce using rule 45 (base -> IDENTIFIER .)
+    MOD             reduce using rule 45 (base -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 45 (base -> IDENTIFIER .)
+    PLUS            reduce using rule 45 (base -> IDENTIFIER .)
+    MINUS           reduce using rule 45 (base -> IDENTIFIER .)
+    RPAREN          reduce using rule 45 (base -> IDENTIFIER .)
+    LESS            reduce using rule 45 (base -> IDENTIFIER .)
+    LESS_EQ         reduce using rule 45 (base -> IDENTIFIER .)
+    GREATER         reduce using rule 45 (base -> IDENTIFIER .)
+    GREATER_EQ      reduce using rule 45 (base -> IDENTIFIER .)
+    EQUAL_TO        reduce using rule 45 (base -> IDENTIFIER .)
+    NOT_EQUAL       reduce using rule 45 (base -> IDENTIFIER .)
 
 
 state 39
 
-    (19) code_block -> block_start stmt_sequence block_end .
+    (46) base -> LPAREN . expr RPAREN
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    IDENTIFIER      reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    PRINT           reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    IF              reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    WHILE           reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    INT             reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    FLOAT           reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    LBRACE          reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    $end            reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    RBRACE          reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
-    ELSE            reduce using rule 19 (code_block -> block_start stmt_sequence block_end .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    expr                           shift and go to state 57
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 40
 
-    (21) block_end -> RBRACE .
+    (26) code_block -> block_start stmt_sequence . block_end
+    (6) stmt_sequence -> stmt_sequence . stmt
+    (28) block_end -> . RBRACE
+    (8) stmt -> . var_decl
+    (9) stmt -> . var_assign
+    (10) stmt -> . output_stmt
+    (11) stmt -> . conditional
+    (12) stmt -> . loop
+    (13) stmt -> . return_stmt
+    (14) stmt -> . code_block
+    (17) var_decl -> . data_type IDENTIFIER SEMICOLON
+    (18) var_decl -> . data_type IDENTIFIER EQUALS expr SEMICOLON
+    (21) var_assign -> . IDENTIFIER EQUALS expr SEMICOLON
+    (22) output_stmt -> . PRINT LPAREN expr RPAREN SEMICOLON
+    (23) conditional -> . IF LPAREN comparison RPAREN code_block
+    (24) conditional -> . IF LPAREN comparison RPAREN code_block ELSE code_block
+    (25) loop -> . WHILE LPAREN comparison RPAREN code_block
+    (15) return_stmt -> . RETURN expr SEMICOLON
+    (16) return_stmt -> . RETURN SEMICOLON
+    (26) code_block -> . block_start stmt_sequence block_end
+    (19) data_type -> . INT
+    (20) data_type -> . FLOAT
+    (27) block_start -> . LBRACE
 
-    IDENTIFIER      reduce using rule 21 (block_end -> RBRACE .)
-    PRINT           reduce using rule 21 (block_end -> RBRACE .)
-    IF              reduce using rule 21 (block_end -> RBRACE .)
-    WHILE           reduce using rule 21 (block_end -> RBRACE .)
-    INT             reduce using rule 21 (block_end -> RBRACE .)
-    FLOAT           reduce using rule 21 (block_end -> RBRACE .)
-    LBRACE          reduce using rule 21 (block_end -> RBRACE .)
-    $end            reduce using rule 21 (block_end -> RBRACE .)
-    RBRACE          reduce using rule 21 (block_end -> RBRACE .)
-    ELSE            reduce using rule 21 (block_end -> RBRACE .)
+    RBRACE          shift and go to state 59
+    IDENTIFIER      shift and go to state 7
+    PRINT           shift and go to state 17
+    IF              shift and go to state 18
+    WHILE           shift and go to state 19
+    RETURN          shift and go to state 20
+    INT             shift and go to state 15
+    FLOAT           shift and go to state 16
+    LBRACE          shift and go to state 22
 
+    block_start                    shift and go to state 21
+    block_end                      shift and go to state 58
+    stmt                           shift and go to state 25
+    var_decl                       shift and go to state 9
+    var_assign                     shift and go to state 10
+    output_stmt                    shift and go to state 11
+    conditional                    shift and go to state 12
+    loop                           shift and go to state 13
+    return_stmt                    shift and go to state 14
+    code_block                     shift and go to state 8
+    data_type                      shift and go to state 26
 
 state 41
 
-    (11) var_decl -> data_type IDENTIFIER EQUALS expr . SEMICOLON
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
+    (5) function -> data_type IDENTIFIER . LPAREN RPAREN code_block
 
-    SEMICOLON       shift and go to state 59
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
+    LPAREN          shift and go to state 43
 
 
 state 42
 
-    (14) var_assign -> IDENTIFIER EQUALS expr SEMICOLON .
+    (17) var_decl -> data_type IDENTIFIER . SEMICOLON
+    (18) var_decl -> data_type IDENTIFIER . EQUALS expr SEMICOLON
 
-    IDENTIFIER      reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    PRINT           reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    IF              reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    WHILE           reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    INT             reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    FLOAT           reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    LBRACE          reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    $end            reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
-    RBRACE          reduce using rule 14 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    SEMICOLON       shift and go to state 44
+    EQUALS          shift and go to state 45
 
 
 state 43
 
-    (29) expr -> expr PLUS . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (5) function -> data_type IDENTIFIER LPAREN . RPAREN code_block
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    RPAREN          shift and go to state 60
 
-    term                           shift and go to state 60
-    base                           shift and go to state 31
 
 state 44
 
-    (30) expr -> expr MINUS . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (17) var_decl -> data_type IDENTIFIER SEMICOLON .
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    IDENTIFIER      reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    PRINT           reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    IF              reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    WHILE           reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    RETURN          reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    INT             reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    FLOAT           reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    LBRACE          reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    $end            reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
+    RBRACE          reduce using rule 17 (var_decl -> data_type IDENTIFIER SEMICOLON .)
 
-    term                           shift and go to state 61
-    base                           shift and go to state 31
 
 state 45
 
-    (32) term -> term MULTIPLY . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (18) var_decl -> data_type IDENTIFIER EQUALS . expr SEMICOLON
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
-    base                           shift and go to state 62
+    expr                           shift and go to state 61
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 46
 
-    (33) term -> term DIVIDE . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (21) var_assign -> IDENTIFIER EQUALS expr . SEMICOLON
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    SEMICOLON       shift and go to state 62
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
 
-    base                           shift and go to state 63
 
 state 47
 
-    (34) term -> term MOD . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (22) output_stmt -> PRINT LPAREN expr . RPAREN SEMICOLON
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    RPAREN          shift and go to state 63
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
 
-    base                           shift and go to state 64
 
 state 48
 
-    (39) base -> LPAREN expr . RPAREN
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
+    (23) conditional -> IF LPAREN comparison . RPAREN code_block
+    (24) conditional -> IF LPAREN comparison . RPAREN code_block ELSE code_block
 
-    RPAREN          shift and go to state 65
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
+    RPAREN          shift and go to state 64
 
 
 state 49
 
-    (15) output_stmt -> PRINT LPAREN expr RPAREN . SEMICOLON
+    (29) comparison -> expr . rel_op expr
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
+    (30) rel_op -> . LESS
+    (31) rel_op -> . LESS_EQ
+    (32) rel_op -> . GREATER
+    (33) rel_op -> . GREATER_EQ
+    (34) rel_op -> . EQUAL_TO
+    (35) rel_op -> . NOT_EQUAL
 
-    SEMICOLON       shift and go to state 66
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    LESS            shift and go to state 66
+    LESS_EQ         shift and go to state 67
+    GREATER         shift and go to state 68
+    GREATER_EQ      shift and go to state 69
+    EQUAL_TO        shift and go to state 70
+    NOT_EQUAL       shift and go to state 71
 
+    rel_op                         shift and go to state 65
 
 state 50
 
-    (16) conditional -> IF LPAREN comparison RPAREN . code_block
-    (17) conditional -> IF LPAREN comparison RPAREN . code_block ELSE code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (20) block_start -> . LBRACE
+    (25) loop -> WHILE LPAREN comparison . RPAREN code_block
 
-    LBRACE          shift and go to state 18
+    RPAREN          shift and go to state 72
 
-    code_block                     shift and go to state 67
-    block_start                    shift and go to state 15
 
 state 51
 
-    (22) comparison -> expr rel_op . expr
-    (29) expr -> . expr PLUS term
-    (30) expr -> . expr MINUS term
-    (31) expr -> . term
-    (32) term -> . term MULTIPLY base
-    (33) term -> . term DIVIDE base
-    (34) term -> . term MOD base
-    (35) term -> . base
-    (36) base -> . INTEGER
-    (37) base -> . DECIMAL
-    (38) base -> . IDENTIFIER
-    (39) base -> . LPAREN expr RPAREN
+    (15) return_stmt -> RETURN expr SEMICOLON .
 
-    INTEGER         shift and go to state 32
-    DECIMAL         shift and go to state 33
-    IDENTIFIER      shift and go to state 28
-    LPAREN          shift and go to state 34
+    IDENTIFIER      reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    PRINT           reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    IF              reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    WHILE           reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    RETURN          reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    INT             reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    FLOAT           reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    LBRACE          reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    $end            reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
+    RBRACE          reduce using rule 15 (return_stmt -> RETURN expr SEMICOLON .)
 
-    expr                           shift and go to state 68
-    term                           shift and go to state 30
-    base                           shift and go to state 31
 
 state 52
 
-    (23) rel_op -> LESS .
+    (36) expr -> expr PLUS . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         reduce using rule 23 (rel_op -> LESS .)
-    DECIMAL         reduce using rule 23 (rel_op -> LESS .)
-    IDENTIFIER      reduce using rule 23 (rel_op -> LESS .)
-    LPAREN          reduce using rule 23 (rel_op -> LESS .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    term                           shift and go to state 73
+    base                           shift and go to state 35
 
 state 53
 
-    (24) rel_op -> LESS_EQ .
+    (37) expr -> expr MINUS . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         reduce using rule 24 (rel_op -> LESS_EQ .)
-    DECIMAL         reduce using rule 24 (rel_op -> LESS_EQ .)
-    IDENTIFIER      reduce using rule 24 (rel_op -> LESS_EQ .)
-    LPAREN          reduce using rule 24 (rel_op -> LESS_EQ .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    term                           shift and go to state 74
+    base                           shift and go to state 35
 
 state 54
 
-    (25) rel_op -> GREATER .
+    (39) term -> term MULTIPLY . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         reduce using rule 25 (rel_op -> GREATER .)
-    DECIMAL         reduce using rule 25 (rel_op -> GREATER .)
-    IDENTIFIER      reduce using rule 25 (rel_op -> GREATER .)
-    LPAREN          reduce using rule 25 (rel_op -> GREATER .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    base                           shift and go to state 75
 
 state 55
 
-    (26) rel_op -> GREATER_EQ .
+    (40) term -> term DIVIDE . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         reduce using rule 26 (rel_op -> GREATER_EQ .)
-    DECIMAL         reduce using rule 26 (rel_op -> GREATER_EQ .)
-    IDENTIFIER      reduce using rule 26 (rel_op -> GREATER_EQ .)
-    LPAREN          reduce using rule 26 (rel_op -> GREATER_EQ .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    base                           shift and go to state 76
 
 state 56
 
-    (27) rel_op -> EQUAL_TO .
+    (41) term -> term MOD . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    INTEGER         reduce using rule 27 (rel_op -> EQUAL_TO .)
-    DECIMAL         reduce using rule 27 (rel_op -> EQUAL_TO .)
-    IDENTIFIER      reduce using rule 27 (rel_op -> EQUAL_TO .)
-    LPAREN          reduce using rule 27 (rel_op -> EQUAL_TO .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    base                           shift and go to state 77
 
 state 57
 
-    (28) rel_op -> NOT_EQUAL .
+    (46) base -> LPAREN expr . RPAREN
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
 
-    INTEGER         reduce using rule 28 (rel_op -> NOT_EQUAL .)
-    DECIMAL         reduce using rule 28 (rel_op -> NOT_EQUAL .)
-    IDENTIFIER      reduce using rule 28 (rel_op -> NOT_EQUAL .)
-    LPAREN          reduce using rule 28 (rel_op -> NOT_EQUAL .)
+    RPAREN          shift and go to state 78
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
 
 
 state 58
 
-    (18) loop -> WHILE LPAREN comparison RPAREN . code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (20) block_start -> . LBRACE
+    (26) code_block -> block_start stmt_sequence block_end .
 
-    LBRACE          shift and go to state 18
+    IDENTIFIER      reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    PRINT           reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    IF              reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    WHILE           reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    RETURN          reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    INT             reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    FLOAT           reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    LBRACE          reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    $end            reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    RBRACE          reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
+    ELSE            reduce using rule 26 (code_block -> block_start stmt_sequence block_end .)
 
-    code_block                     shift and go to state 69
-    block_start                    shift and go to state 15
 
 state 59
 
-    (11) var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .
+    (28) block_end -> RBRACE .
 
-    IDENTIFIER      reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    PRINT           reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    IF              reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    WHILE           reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    INT             reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    FLOAT           reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    LBRACE          reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    $end            reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
-    RBRACE          reduce using rule 11 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    IDENTIFIER      reduce using rule 28 (block_end -> RBRACE .)
+    PRINT           reduce using rule 28 (block_end -> RBRACE .)
+    IF              reduce using rule 28 (block_end -> RBRACE .)
+    WHILE           reduce using rule 28 (block_end -> RBRACE .)
+    RETURN          reduce using rule 28 (block_end -> RBRACE .)
+    INT             reduce using rule 28 (block_end -> RBRACE .)
+    FLOAT           reduce using rule 28 (block_end -> RBRACE .)
+    LBRACE          reduce using rule 28 (block_end -> RBRACE .)
+    $end            reduce using rule 28 (block_end -> RBRACE .)
+    RBRACE          reduce using rule 28 (block_end -> RBRACE .)
+    ELSE            reduce using rule 28 (block_end -> RBRACE .)
 
 
 state 60
 
-    (29) expr -> expr PLUS term .
-    (32) term -> term . MULTIPLY base
-    (33) term -> term . DIVIDE base
-    (34) term -> term . MOD base
+    (5) function -> data_type IDENTIFIER LPAREN RPAREN . code_block
+    (26) code_block -> . block_start stmt_sequence block_end
+    (27) block_start -> . LBRACE
 
-    SEMICOLON       reduce using rule 29 (expr -> expr PLUS term .)
-    PLUS            reduce using rule 29 (expr -> expr PLUS term .)
-    MINUS           reduce using rule 29 (expr -> expr PLUS term .)
-    RPAREN          reduce using rule 29 (expr -> expr PLUS term .)
-    LESS            reduce using rule 29 (expr -> expr PLUS term .)
-    LESS_EQ         reduce using rule 29 (expr -> expr PLUS term .)
-    GREATER         reduce using rule 29 (expr -> expr PLUS term .)
-    GREATER_EQ      reduce using rule 29 (expr -> expr PLUS term .)
-    EQUAL_TO        reduce using rule 29 (expr -> expr PLUS term .)
-    NOT_EQUAL       reduce using rule 29 (expr -> expr PLUS term .)
-    MULTIPLY        shift and go to state 45
-    DIVIDE          shift and go to state 46
-    MOD             shift and go to state 47
+    LBRACE          shift and go to state 22
 
+    code_block                     shift and go to state 79
+    block_start                    shift and go to state 21
 
 state 61
 
-    (30) expr -> expr MINUS term .
-    (32) term -> term . MULTIPLY base
-    (33) term -> term . DIVIDE base
-    (34) term -> term . MOD base
+    (18) var_decl -> data_type IDENTIFIER EQUALS expr . SEMICOLON
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
 
-    SEMICOLON       reduce using rule 30 (expr -> expr MINUS term .)
-    PLUS            reduce using rule 30 (expr -> expr MINUS term .)
-    MINUS           reduce using rule 30 (expr -> expr MINUS term .)
-    RPAREN          reduce using rule 30 (expr -> expr MINUS term .)
-    LESS            reduce using rule 30 (expr -> expr MINUS term .)
-    LESS_EQ         reduce using rule 30 (expr -> expr MINUS term .)
-    GREATER         reduce using rule 30 (expr -> expr MINUS term .)
-    GREATER_EQ      reduce using rule 30 (expr -> expr MINUS term .)
-    EQUAL_TO        reduce using rule 30 (expr -> expr MINUS term .)
-    NOT_EQUAL       reduce using rule 30 (expr -> expr MINUS term .)
-    MULTIPLY        shift and go to state 45
-    DIVIDE          shift and go to state 46
-    MOD             shift and go to state 47
+    SEMICOLON       shift and go to state 80
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
 
 
 state 62
 
-    (32) term -> term MULTIPLY base .
+    (21) var_assign -> IDENTIFIER EQUALS expr SEMICOLON .
 
-    MULTIPLY        reduce using rule 32 (term -> term MULTIPLY base .)
-    DIVIDE          reduce using rule 32 (term -> term MULTIPLY base .)
-    MOD             reduce using rule 32 (term -> term MULTIPLY base .)
-    SEMICOLON       reduce using rule 32 (term -> term MULTIPLY base .)
-    PLUS            reduce using rule 32 (term -> term MULTIPLY base .)
-    MINUS           reduce using rule 32 (term -> term MULTIPLY base .)
-    RPAREN          reduce using rule 32 (term -> term MULTIPLY base .)
-    LESS            reduce using rule 32 (term -> term MULTIPLY base .)
-    LESS_EQ         reduce using rule 32 (term -> term MULTIPLY base .)
-    GREATER         reduce using rule 32 (term -> term MULTIPLY base .)
-    GREATER_EQ      reduce using rule 32 (term -> term MULTIPLY base .)
-    EQUAL_TO        reduce using rule 32 (term -> term MULTIPLY base .)
-    NOT_EQUAL       reduce using rule 32 (term -> term MULTIPLY base .)
+    IDENTIFIER      reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    PRINT           reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    IF              reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    WHILE           reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    RETURN          reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    INT             reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    FLOAT           reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    LBRACE          reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    $end            reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
+    RBRACE          reduce using rule 21 (var_assign -> IDENTIFIER EQUALS expr SEMICOLON .)
 
 
 state 63
 
-    (33) term -> term DIVIDE base .
+    (22) output_stmt -> PRINT LPAREN expr RPAREN . SEMICOLON
 
-    MULTIPLY        reduce using rule 33 (term -> term DIVIDE base .)
-    DIVIDE          reduce using rule 33 (term -> term DIVIDE base .)
-    MOD             reduce using rule 33 (term -> term DIVIDE base .)
-    SEMICOLON       reduce using rule 33 (term -> term DIVIDE base .)
-    PLUS            reduce using rule 33 (term -> term DIVIDE base .)
-    MINUS           reduce using rule 33 (term -> term DIVIDE base .)
-    RPAREN          reduce using rule 33 (term -> term DIVIDE base .)
-    LESS            reduce using rule 33 (term -> term DIVIDE base .)
-    LESS_EQ         reduce using rule 33 (term -> term DIVIDE base .)
-    GREATER         reduce using rule 33 (term -> term DIVIDE base .)
-    GREATER_EQ      reduce using rule 33 (term -> term DIVIDE base .)
-    EQUAL_TO        reduce using rule 33 (term -> term DIVIDE base .)
-    NOT_EQUAL       reduce using rule 33 (term -> term DIVIDE base .)
+    SEMICOLON       shift and go to state 81
 
 
 state 64
 
-    (34) term -> term MOD base .
+    (23) conditional -> IF LPAREN comparison RPAREN . code_block
+    (24) conditional -> IF LPAREN comparison RPAREN . code_block ELSE code_block
+    (26) code_block -> . block_start stmt_sequence block_end
+    (27) block_start -> . LBRACE
 
-    MULTIPLY        reduce using rule 34 (term -> term MOD base .)
-    DIVIDE          reduce using rule 34 (term -> term MOD base .)
-    MOD             reduce using rule 34 (term -> term MOD base .)
-    SEMICOLON       reduce using rule 34 (term -> term MOD base .)
-    PLUS            reduce using rule 34 (term -> term MOD base .)
-    MINUS           reduce using rule 34 (term -> term MOD base .)
-    RPAREN          reduce using rule 34 (term -> term MOD base .)
-    LESS            reduce using rule 34 (term -> term MOD base .)
-    LESS_EQ         reduce using rule 34 (term -> term MOD base .)
-    GREATER         reduce using rule 34 (term -> term MOD base .)
-    GREATER_EQ      reduce using rule 34 (term -> term MOD base .)
-    EQUAL_TO        reduce using rule 34 (term -> term MOD base .)
-    NOT_EQUAL       reduce using rule 34 (term -> term MOD base .)
+    LBRACE          shift and go to state 22
 
+    code_block                     shift and go to state 82
+    block_start                    shift and go to state 21
 
 state 65
 
-    (39) base -> LPAREN expr RPAREN .
+    (29) comparison -> expr rel_op . expr
+    (36) expr -> . expr PLUS term
+    (37) expr -> . expr MINUS term
+    (38) expr -> . term
+    (39) term -> . term MULTIPLY base
+    (40) term -> . term DIVIDE base
+    (41) term -> . term MOD base
+    (42) term -> . base
+    (43) base -> . INTEGER
+    (44) base -> . DECIMAL
+    (45) base -> . IDENTIFIER
+    (46) base -> . LPAREN expr RPAREN
 
-    MULTIPLY        reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    DIVIDE          reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    MOD             reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    SEMICOLON       reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    PLUS            reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    MINUS           reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    RPAREN          reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    LESS            reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    LESS_EQ         reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    GREATER         reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    GREATER_EQ      reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    EQUAL_TO        reduce using rule 39 (base -> LPAREN expr RPAREN .)
-    NOT_EQUAL       reduce using rule 39 (base -> LPAREN expr RPAREN .)
+    INTEGER         shift and go to state 36
+    DECIMAL         shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    LPAREN          shift and go to state 39
 
+    expr                           shift and go to state 83
+    term                           shift and go to state 34
+    base                           shift and go to state 35
 
 state 66
 
-    (15) output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .
+    (30) rel_op -> LESS .
 
-    IDENTIFIER      reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    PRINT           reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    IF              reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    WHILE           reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    INT             reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    FLOAT           reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    LBRACE          reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    $end            reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
-    RBRACE          reduce using rule 15 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    INTEGER         reduce using rule 30 (rel_op -> LESS .)
+    DECIMAL         reduce using rule 30 (rel_op -> LESS .)
+    IDENTIFIER      reduce using rule 30 (rel_op -> LESS .)
+    LPAREN          reduce using rule 30 (rel_op -> LESS .)
 
 
 state 67
 
-    (16) conditional -> IF LPAREN comparison RPAREN code_block .
-    (17) conditional -> IF LPAREN comparison RPAREN code_block . ELSE code_block
+    (31) rel_op -> LESS_EQ .
 
-    IDENTIFIER      reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    PRINT           reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    IF              reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    WHILE           reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    INT             reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    FLOAT           reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    LBRACE          reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    $end            reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    RBRACE          reduce using rule 16 (conditional -> IF LPAREN comparison RPAREN code_block .)
-    ELSE            shift and go to state 70
+    INTEGER         reduce using rule 31 (rel_op -> LESS_EQ .)
+    DECIMAL         reduce using rule 31 (rel_op -> LESS_EQ .)
+    IDENTIFIER      reduce using rule 31 (rel_op -> LESS_EQ .)
+    LPAREN          reduce using rule 31 (rel_op -> LESS_EQ .)
 
 
 state 68
 
-    (22) comparison -> expr rel_op expr .
-    (29) expr -> expr . PLUS term
-    (30) expr -> expr . MINUS term
+    (32) rel_op -> GREATER .
 
-    RPAREN          reduce using rule 22 (comparison -> expr rel_op expr .)
-    PLUS            shift and go to state 43
-    MINUS           shift and go to state 44
+    INTEGER         reduce using rule 32 (rel_op -> GREATER .)
+    DECIMAL         reduce using rule 32 (rel_op -> GREATER .)
+    IDENTIFIER      reduce using rule 32 (rel_op -> GREATER .)
+    LPAREN          reduce using rule 32 (rel_op -> GREATER .)
 
 
 state 69
 
-    (18) loop -> WHILE LPAREN comparison RPAREN code_block .
+    (33) rel_op -> GREATER_EQ .
 
-    IDENTIFIER      reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    PRINT           reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    IF              reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    WHILE           reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    INT             reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    FLOAT           reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    LBRACE          reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    $end            reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
-    RBRACE          reduce using rule 18 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    INTEGER         reduce using rule 33 (rel_op -> GREATER_EQ .)
+    DECIMAL         reduce using rule 33 (rel_op -> GREATER_EQ .)
+    IDENTIFIER      reduce using rule 33 (rel_op -> GREATER_EQ .)
+    LPAREN          reduce using rule 33 (rel_op -> GREATER_EQ .)
 
 
 state 70
 
-    (17) conditional -> IF LPAREN comparison RPAREN code_block ELSE . code_block
-    (19) code_block -> . block_start stmt_sequence block_end
-    (20) block_start -> . LBRACE
+    (34) rel_op -> EQUAL_TO .
 
-    LBRACE          shift and go to state 18
+    INTEGER         reduce using rule 34 (rel_op -> EQUAL_TO .)
+    DECIMAL         reduce using rule 34 (rel_op -> EQUAL_TO .)
+    IDENTIFIER      reduce using rule 34 (rel_op -> EQUAL_TO .)
+    LPAREN          reduce using rule 34 (rel_op -> EQUAL_TO .)
 
-    code_block                     shift and go to state 71
-    block_start                    shift and go to state 15
 
 state 71
 
-    (17) conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .
+    (35) rel_op -> NOT_EQUAL .
 
-    IDENTIFIER      reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    PRINT           reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    IF              reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    WHILE           reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    INT             reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    FLOAT           reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    LBRACE          reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    $end            reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
-    RBRACE          reduce using rule 17 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    INTEGER         reduce using rule 35 (rel_op -> NOT_EQUAL .)
+    DECIMAL         reduce using rule 35 (rel_op -> NOT_EQUAL .)
+    IDENTIFIER      reduce using rule 35 (rel_op -> NOT_EQUAL .)
+    LPAREN          reduce using rule 35 (rel_op -> NOT_EQUAL .)
+
+
+state 72
+
+    (25) loop -> WHILE LPAREN comparison RPAREN . code_block
+    (26) code_block -> . block_start stmt_sequence block_end
+    (27) block_start -> . LBRACE
+
+    LBRACE          shift and go to state 22
+
+    code_block                     shift and go to state 84
+    block_start                    shift and go to state 21
+
+state 73
+
+    (36) expr -> expr PLUS term .
+    (39) term -> term . MULTIPLY base
+    (40) term -> term . DIVIDE base
+    (41) term -> term . MOD base
+
+    SEMICOLON       reduce using rule 36 (expr -> expr PLUS term .)
+    PLUS            reduce using rule 36 (expr -> expr PLUS term .)
+    MINUS           reduce using rule 36 (expr -> expr PLUS term .)
+    RPAREN          reduce using rule 36 (expr -> expr PLUS term .)
+    LESS            reduce using rule 36 (expr -> expr PLUS term .)
+    LESS_EQ         reduce using rule 36 (expr -> expr PLUS term .)
+    GREATER         reduce using rule 36 (expr -> expr PLUS term .)
+    GREATER_EQ      reduce using rule 36 (expr -> expr PLUS term .)
+    EQUAL_TO        reduce using rule 36 (expr -> expr PLUS term .)
+    NOT_EQUAL       reduce using rule 36 (expr -> expr PLUS term .)
+    MULTIPLY        shift and go to state 54
+    DIVIDE          shift and go to state 55
+    MOD             shift and go to state 56
+
+
+state 74
+
+    (37) expr -> expr MINUS term .
+    (39) term -> term . MULTIPLY base
+    (40) term -> term . DIVIDE base
+    (41) term -> term . MOD base
+
+    SEMICOLON       reduce using rule 37 (expr -> expr MINUS term .)
+    PLUS            reduce using rule 37 (expr -> expr MINUS term .)
+    MINUS           reduce using rule 37 (expr -> expr MINUS term .)
+    RPAREN          reduce using rule 37 (expr -> expr MINUS term .)
+    LESS            reduce using rule 37 (expr -> expr MINUS term .)
+    LESS_EQ         reduce using rule 37 (expr -> expr MINUS term .)
+    GREATER         reduce using rule 37 (expr -> expr MINUS term .)
+    GREATER_EQ      reduce using rule 37 (expr -> expr MINUS term .)
+    EQUAL_TO        reduce using rule 37 (expr -> expr MINUS term .)
+    NOT_EQUAL       reduce using rule 37 (expr -> expr MINUS term .)
+    MULTIPLY        shift and go to state 54
+    DIVIDE          shift and go to state 55
+    MOD             shift and go to state 56
+
+
+state 75
+
+    (39) term -> term MULTIPLY base .
+
+    MULTIPLY        reduce using rule 39 (term -> term MULTIPLY base .)
+    DIVIDE          reduce using rule 39 (term -> term MULTIPLY base .)
+    MOD             reduce using rule 39 (term -> term MULTIPLY base .)
+    SEMICOLON       reduce using rule 39 (term -> term MULTIPLY base .)
+    PLUS            reduce using rule 39 (term -> term MULTIPLY base .)
+    MINUS           reduce using rule 39 (term -> term MULTIPLY base .)
+    RPAREN          reduce using rule 39 (term -> term MULTIPLY base .)
+    LESS            reduce using rule 39 (term -> term MULTIPLY base .)
+    LESS_EQ         reduce using rule 39 (term -> term MULTIPLY base .)
+    GREATER         reduce using rule 39 (term -> term MULTIPLY base .)
+    GREATER_EQ      reduce using rule 39 (term -> term MULTIPLY base .)
+    EQUAL_TO        reduce using rule 39 (term -> term MULTIPLY base .)
+    NOT_EQUAL       reduce using rule 39 (term -> term MULTIPLY base .)
+
+
+state 76
+
+    (40) term -> term DIVIDE base .
+
+    MULTIPLY        reduce using rule 40 (term -> term DIVIDE base .)
+    DIVIDE          reduce using rule 40 (term -> term DIVIDE base .)
+    MOD             reduce using rule 40 (term -> term DIVIDE base .)
+    SEMICOLON       reduce using rule 40 (term -> term DIVIDE base .)
+    PLUS            reduce using rule 40 (term -> term DIVIDE base .)
+    MINUS           reduce using rule 40 (term -> term DIVIDE base .)
+    RPAREN          reduce using rule 40 (term -> term DIVIDE base .)
+    LESS            reduce using rule 40 (term -> term DIVIDE base .)
+    LESS_EQ         reduce using rule 40 (term -> term DIVIDE base .)
+    GREATER         reduce using rule 40 (term -> term DIVIDE base .)
+    GREATER_EQ      reduce using rule 40 (term -> term DIVIDE base .)
+    EQUAL_TO        reduce using rule 40 (term -> term DIVIDE base .)
+    NOT_EQUAL       reduce using rule 40 (term -> term DIVIDE base .)
+
+
+state 77
+
+    (41) term -> term MOD base .
+
+    MULTIPLY        reduce using rule 41 (term -> term MOD base .)
+    DIVIDE          reduce using rule 41 (term -> term MOD base .)
+    MOD             reduce using rule 41 (term -> term MOD base .)
+    SEMICOLON       reduce using rule 41 (term -> term MOD base .)
+    PLUS            reduce using rule 41 (term -> term MOD base .)
+    MINUS           reduce using rule 41 (term -> term MOD base .)
+    RPAREN          reduce using rule 41 (term -> term MOD base .)
+    LESS            reduce using rule 41 (term -> term MOD base .)
+    LESS_EQ         reduce using rule 41 (term -> term MOD base .)
+    GREATER         reduce using rule 41 (term -> term MOD base .)
+    GREATER_EQ      reduce using rule 41 (term -> term MOD base .)
+    EQUAL_TO        reduce using rule 41 (term -> term MOD base .)
+    NOT_EQUAL       reduce using rule 41 (term -> term MOD base .)
+
+
+state 78
+
+    (46) base -> LPAREN expr RPAREN .
+
+    MULTIPLY        reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    MOD             reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    SEMICOLON       reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    LESS            reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    LESS_EQ         reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    GREATER         reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    GREATER_EQ      reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    EQUAL_TO        reduce using rule 46 (base -> LPAREN expr RPAREN .)
+    NOT_EQUAL       reduce using rule 46 (base -> LPAREN expr RPAREN .)
+
+
+state 79
+
+    (5) function -> data_type IDENTIFIER LPAREN RPAREN code_block .
+
+    INT             reduce using rule 5 (function -> data_type IDENTIFIER LPAREN RPAREN code_block .)
+    FLOAT           reduce using rule 5 (function -> data_type IDENTIFIER LPAREN RPAREN code_block .)
+    $end            reduce using rule 5 (function -> data_type IDENTIFIER LPAREN RPAREN code_block .)
+
+
+state 80
+
+    (18) var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .
+
+    IDENTIFIER      reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    PRINT           reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    IF              reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    WHILE           reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    RETURN          reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    INT             reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    FLOAT           reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    LBRACE          reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    $end            reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+    RBRACE          reduce using rule 18 (var_decl -> data_type IDENTIFIER EQUALS expr SEMICOLON .)
+
+
+state 81
+
+    (22) output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .
+
+    IDENTIFIER      reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    PRINT           reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    IF              reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    WHILE           reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    RETURN          reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    INT             reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    FLOAT           reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    LBRACE          reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    $end            reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+    RBRACE          reduce using rule 22 (output_stmt -> PRINT LPAREN expr RPAREN SEMICOLON .)
+
+
+state 82
+
+    (23) conditional -> IF LPAREN comparison RPAREN code_block .
+    (24) conditional -> IF LPAREN comparison RPAREN code_block . ELSE code_block
+
+    IDENTIFIER      reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    PRINT           reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    IF              reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    WHILE           reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    RETURN          reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    INT             reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    FLOAT           reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    LBRACE          reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    $end            reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    RBRACE          reduce using rule 23 (conditional -> IF LPAREN comparison RPAREN code_block .)
+    ELSE            shift and go to state 85
+
+
+state 83
+
+    (29) comparison -> expr rel_op expr .
+    (36) expr -> expr . PLUS term
+    (37) expr -> expr . MINUS term
+
+    RPAREN          reduce using rule 29 (comparison -> expr rel_op expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+
+
+state 84
+
+    (25) loop -> WHILE LPAREN comparison RPAREN code_block .
+
+    IDENTIFIER      reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    PRINT           reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    IF              reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    WHILE           reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    RETURN          reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    INT             reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    FLOAT           reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    LBRACE          reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    $end            reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+    RBRACE          reduce using rule 25 (loop -> WHILE LPAREN comparison RPAREN code_block .)
+
+
+state 85
+
+    (24) conditional -> IF LPAREN comparison RPAREN code_block ELSE . code_block
+    (26) code_block -> . block_start stmt_sequence block_end
+    (27) block_start -> . LBRACE
+
+    LBRACE          shift and go to state 22
+
+    code_block                     shift and go to state 86
+    block_start                    shift and go to state 21
+
+state 86
+
+    (24) conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .
+
+    IDENTIFIER      reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    PRINT           reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    IF              reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    WHILE           reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    RETURN          reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    INT             reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    FLOAT           reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    LBRACE          reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    $end            reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
+    RBRACE          reduce using rule 24 (conditional -> IF LPAREN comparison RPAREN code_block ELSE code_block .)
 

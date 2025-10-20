@@ -1,3 +1,4 @@
+# parser.py
 import ply.yacc as yacc
 from lexer import TokenScanner
 from symbol_table import VariableRegistry
@@ -29,9 +30,22 @@ class SyntaxProcessor:
         return dest
 
     def p_start(self, p):
-        'start : stmt_sequence'
+        '''start : function_list
+                 | stmt_sequence'''
         p[0] = ('program', p[1])
         self.ast.append(p[0])
+
+    def p_function_list(self, p):
+        '''function_list : function_list function
+                         | function'''
+        p[0] = p[1] + [p[2]] if len(p) == 3 else [p[1]]
+
+    def p_function(self, p):
+        'function : data_type IDENTIFIER LPAREN RPAREN code_block'
+        func_name = p[2]
+        return_type = p[1]
+        body = p[5]
+        p[0] = ('function', return_type, func_name, body)
 
     def p_stmt_sequence(self, p):
         '''stmt_sequence : stmt_sequence stmt
@@ -44,8 +58,19 @@ class SyntaxProcessor:
                | output_stmt
                | conditional
                | loop
+               | return_stmt
                | code_block'''
         p[0] = p[1]
+
+    def p_return_stmt(self, p):
+        '''return_stmt : RETURN expr SEMICOLON
+                       | RETURN SEMICOLON'''
+        if len(p) == 4:
+            self.add_instruction('return', p[2], None, None)
+            p[0] = ('return', p[2])
+        else:
+            self.add_instruction('return', None, None, None)
+            p[0] = ('return', None)
 
     def p_var_decl(self, p):
         '''var_decl : data_type IDENTIFIER SEMICOLON
@@ -91,12 +116,10 @@ class SyntaxProcessor:
         lbl_false = self.gen_label()
         lbl_end = self.gen_label()
         if len(p) == 6:
-            # if (cmp) block
             self.add_instruction('jump_if_false', cmp, lbl_false, None)
             self.add_instruction('mark', lbl_false, None, None)
             p[0] = ('if', cmp, p[5])
         else:
-            # if (cmp) block else block
             self.add_instruction('jump_if_false', cmp, lbl_false, None)
             self.add_instruction('mark', lbl_false, None, None)
             self.add_instruction('jump', lbl_end, None, None)

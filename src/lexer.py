@@ -2,6 +2,7 @@
 PLY-based lexer wrapped in a TokenScanner class.
 Requires: ply (pip install ply)
 """
+# Lexer.py
 import ply.lex as lex
 import re
 

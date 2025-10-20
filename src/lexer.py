@@ -1,18 +1,7 @@
 """
-Improved PLY-based lexer wrapped in a TokenScanner class.
-
-Notes / changes made compared to the original:
-- Reworked important tokens (==, !=, <=, >=, decimal) as functions so PLY preserves correct matching order.
-- Kept comment rules as functions so comment patterns take precedence over the DIVIDE token.
-- Track the input source in self._code so we can compute column (human-friendly) positions.
-- t_error now reports line and column and appends a clear message to self.issues.
-- tokenize() renamed to scan() (keeps your API) and returns tokens with 'kind','val','ln','col','pos'.
-- Defensive: initialize() constructs the lexer once. initialize() is called automatically from __init__.
-- Added example usage in the docstring below.
-
+PLY-based lexer wrapped in a TokenScanner class.
 Requires: ply (pip install ply)
 """
-
 import ply.lex as lex
 import re
 
@@ -52,39 +41,30 @@ class TokenScanner:
     t_COMMA = r','
     t_ignore = ' \t'  # spaces and tabs ignored
 
-    # state to hold the last scanned source text so we can compute columns
     _code = ''
     scanner = None
 
     def __init__(self):
         self.token_stream = []
         self.issues = []
-        # Build lexer
         self.initialize()
 
     def initialize(self):
         """Create the PLY lexer instance for this object."""
-        # PLY will inspect 'self' for t_* attributes and tokens list.
-        # Using lex.lex(module=self) is supported.
+        
         self.scanner = lex.lex(module=self)
 
-    #
-    # Comment rules: functions so they take precedence over the DIVIDE token
-    #
+  
     def t_COMMENT_SINGLE(self, t):
         r'//.*'
-        # ignore single line comments; update line number handled by newline rule if present in comment
         pass
 
     def t_COMMENT_MULTI(self, t):
         r'/\*(.|\n)*?\*/'
-        # update line number to account for newlines inside the comment
         t.lexer.lineno += t.value.count('\n')
         pass
 
-    #
-    # Multi-character / precedence-critical tokens (functions to guarantee ordering)
-    #
+  
     def t_EQUAL_TO(self, t):
         r'=='
         t.type = 'EQUAL_TO'
@@ -137,7 +117,6 @@ class TokenScanner:
     #
     def t_IDENTIFIER(self, t):
         r'[A-Za-z_][A-Za-z_0-9]*'
-        # map reserved words to token types
         if t.value in self.keywords:
             t.type = self.keywords[t.value]
         else:
@@ -150,19 +129,15 @@ class TokenScanner:
     def t_newline(self, t):
         r'\n+'
         t.lexer.lineno += len(t.value)
-        # newlines are not returned as tokens
 
     #
     # Error handling
     #
     def t_error(self, t):
-        # t is a LexToken; t.value is the rest of the input string starting at lexpos
         ch = t.value[0]
-        # compute column
         col = self._compute_column(t.lexpos)
         msg = f"Invalid character {ch!r} at line {t.lineno}, column {col}"
         self.issues.append(msg)
-        # skip the offending character and continue
         t.lexer.skip(1)
 
     #
@@ -171,7 +146,6 @@ class TokenScanner:
     def _compute_column(self, lexpos):
         if not self._code:
             return lexpos
-        # lexpos is index in the input string
         last_nl = self._code.rfind('\n', 0, lexpos)
         if last_nl < 0:
             return lexpos + 1
@@ -181,24 +155,12 @@ class TokenScanner:
     # Main scanning API
     #
     def scan(self, code):
-        """
-        Scan source code and return token stream plus any lexing issues.
-
-        Returns:
-            (token_stream, issues)
-            token_stream: list of dicts with keys:
-               - kind: token type name (e.g. 'IDENTIFIER', 'INT', 'PLUS', 'IF', ...)
-               - val: token value (int/float/str)
-               - ln: line number (1-based)
-               - col: column number (1-based)
-               - pos: lexpos (0-based index into the source)
-        """
+       
         # reset state
         self.token_stream = []
         self.issues = []
         self._code = code
         self.scanner.input(code)
-        # ensure line numbers start at 1
         self.scanner.lineno = 1
 
         while True:
@@ -218,7 +180,6 @@ class TokenScanner:
 
 
 if __name__ == '__main__':
-    # quick manual test / demo
     sample = r'''
     // sample program
     int main() {

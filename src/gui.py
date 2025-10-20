@@ -23,7 +23,8 @@ class CompilerInterface:
 
     def __init__(self, window):
         self.window = window
-        self.window.title("Mini Compiler - By Soma Das")
+        # Title updated to show your name
+        self.window.title("Mini Compiler - By Maruf Ahammed")
         self.window.geometry("1400x850")
         self.window.configure(bg='#1e1e1e')
 

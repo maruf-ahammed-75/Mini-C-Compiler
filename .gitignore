@@ -1,0 +1,3 @@
+# Only ignore in src folder
+src/__pycache__/
+src/parsetab.py

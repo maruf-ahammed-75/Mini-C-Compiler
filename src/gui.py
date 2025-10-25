@@ -186,11 +186,16 @@ class CompilerInterface:
 
         # Symbol Table Display
         var_display = "SYMBOL TABLE\n" + "=" * 100 + "\n\n"
-        var_display += f"{'Identifier':<18} {'Type':<12} {'Value':<12} {'Context':<15} {'Scope':<20} {'Level':<6}\n"
+        var_display += f"{'Identifier':<18} {'Type':<12} {'Context':<15} {'Scope':<20} {'Level':<6}\n"
         var_display += "-" * 100 + "\n"
         for entry in self.processor.registry.all_entries():
-            val_str = str(entry.get('val')) if entry.get('val') is not None else 'None'
-            var_display += f"{entry.get('id',''):<18} {entry.get('dtype',''):<12} {val_str:<12} {entry.get('ctx',''):<15} {entry.get('scope',''):<20} {entry.get('scope_level',''):<6}\n"
+            var_display += (
+                f"{entry.get('id',''):<18} "
+                f"{entry.get('dtype',''):<12} "
+                f"{entry.get('ctx',''):<15} "
+                f"{entry.get('scope',''):<20} "
+                f"{entry.get('scope_level',''):<6}\n"
+            )
         self.var_view.insert('1.0', var_display)
 
         # IR Display
